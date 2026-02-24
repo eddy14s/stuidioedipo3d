@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Tour Virtual 360°</title>
+
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum/build/pannellum.css">
+</head>
+
+<body class="landing">
+
+<!-- 🔒 LANDING / SENHA -->
+<div class="landing-box" id="landing">
+  <h1>Tour Virtual 360°</h1>
+  <p>Digite a senha para acessar</p>
+
+  <input type="password" id="password" class="input-password" placeholder="Senha">
+  <button class="btn" onclick="entrar()">Entrar no Tour</button>
+</div>
+
+<!-- ⏳ LOADER -->
+<div id="loader">
+  <div class="spinner"></div>
+  <p>Carregando tour...</p>
+</div>
+
+<!-- 🌐 TOUR -->
+<div id="tour">
+
+  <div id="menu">
+    <strong>Cenas</strong>
+  </div>
+
+  <div id="help-btn">Ajuda ⓘ</div>
+
+  <div id="help-modal">
+    <div id="help-content">
+      <h2>Controles</h2>
+      <ul>
+        <li>Arraste para olhar</li>
+        <li>Scroll para zoom</li>
+        <li>← → trocar cena</li>
+      </ul>
+      <button id="close-help">Fechar</button>
+    </div>
+  </div>
+
+  <div id="panorama"></div>
+
+</div>
+
+<!-- SCRIPTS -->
+<script src="https://cdn.jsdelivr.net/npm/pannellum/build/pannellum.js"></script>
+
+<script src="config.js"></script>
+<script src="scenes.js"></script>
+<script src="viewer.js"></script>
+<script src="menu.js"></script>
+<script src="keyboard.js"></script>
+<script src="help.js"></script>
+
+<!-- CONTROLE DE ENTRADA -->
+<script>
+function entrar() {
+  const senha = document.getElementById('password').value;
+
+  if (senha !== "7775") {
+    alert("Senha incorreta");
+    return;
+  }
+
+  localStorage.setItem("tourAuth", "ok");
+
+  document.getElementById('landing').style.display = "none";
+  document.getElementById('loader').style.display = "flex";
+
+  setTimeout(() => {
+    document.getElementById('loader').style.display = "none";
+    document.getElementById('tour').style.display = "block";
+
+    // inicia o tour AGORA
+    iniciarTour();
+
+    document.documentElement.requestFullscreen?.();
+  }, 1200);
+}
+
+if (localStorage.getItem("tourAuth") === "ok") {
+  document.getElementById('landing').style.display = "none";
+  document.getElementById('tour').style.display = "block";
+  iniciarTour();
+}
+</script>
+
+
+</body>
+</html>
