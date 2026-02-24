@@ -3,16 +3,18 @@ const scenes = {};
 
 for (let i = 1; i <= CONFIG.totalImagens; i++) {
   const id = `scene_${i}`;
+  const fileName = `${i}.${CONFIG.extensao}`;
+  const assetPath = getAssetPath(fileName);
 
   imagens360.push({
     id,
-    arquivo: `${CONFIG.pasta}${i}.${CONFIG.extensao}`,
+    arquivo: assetPath,
     titulo: `Cena ${i}`,
-    thumb: `${CONFIG.pasta}${i}.${CONFIG.extensao}`
+    thumb: assetPath
   });
 
   scenes[id] = {
     type: "equirectangular",
-    panorama: `${CONFIG.pasta}${i}.${CONFIG.extensao}`
+    panorama: assetPath
   };
 }
