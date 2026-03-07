@@ -1,7 +1,7 @@
 const CONFIG = {
   pasta: "imagens_360",
   extensao: "jpg",
-  totalImagens: 4
+  totalImagens: 2
 };
 
 function getAssetPath(fileName) {
