@@ -15,6 +15,11 @@ html, body {
   background: #000;
 }
 
+/* Remove o link de créditos "Pannellum" que aparece por padrão no visualizador */
+.pnlm-about-msg {
+  display: none !important;
+}
+
 
 /* LANDING */
 .landing {

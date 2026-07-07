@@ -36,9 +36,21 @@ Uso publicando so uma subpasta especifica (ex: so as imagens noturnas):
 
 Uso apontando uma pasta de renders manualmente:
     python publicar.py --cliente "Casa Silva" --pasta "C:\\Renders\\CasaSilva"
+
+Uso para REMOVER um cliente (apaga a subpasta local + GitHub):
+    python publicar.py --remover "Casa Silva"
+
+Uso para VER a lista de clientes ativos, links e senhas:
+    python publicar.py --listar
+
+Um arquivo "clientes.csv" e mantido automaticamente na raiz do repositorio,
+com o historico de cada cliente (link, senha, data, status). Esse arquivo
+fica SOMENTE no seu computador (o script o adiciona ao .gitignore sozinho),
+nunca e enviado ao GitHub - importante porque o repositorio e publico.
 """
 
 import argparse
+import csv
 import random
 import re
 import shutil
@@ -67,6 +79,11 @@ PASTA_BASE_CLIENTES = Path(r"E:\0_STUDIO_3D\1_PROJETOS_2026")
 
 # Nome da subpasta de renders dentro da pasta de cada cliente
 NOME_PASTA_RENDER = "render360"
+
+# Arquivo local com o histórico de clientes/links/senhas (NUNCA vai pro GitHub,
+# pois o repositório é público - veja garantir_gitignore())
+CLIENTES_CSV = REPO_DIR / "clientes.csv"
+CAMPOS_CSV = ["cliente", "slug", "link", "senha", "total_imagens", "data", "status"]
 
 # Extensoes de imagem aceitas na pasta de renders do cliente
 EXTENSOES_VALIDAS = (".jpg", ".jpeg", ".png")
@@ -198,12 +215,135 @@ def atualizar_config_js(config_path: Path, total_imagens: int, extensao: str, se
     config_path.write_text(conteudo, encoding="utf-8")
 
 
+def garantir_gitignore():
+    """Garante que clientes.csv NUNCA seja enviado ao GitHub (repositorio
+    publico), mesmo que alguem rode 'git add -A' sem pensar."""
+    gitignore = REPO_DIR / ".gitignore"
+    linha = "clientes.csv"
+
+    if gitignore.exists():
+        conteudo = gitignore.read_text(encoding="utf-8")
+        if linha in conteudo.splitlines():
+            return
+        with gitignore.open("a", encoding="utf-8") as f:
+            f.write(f"\n{linha}\n")
+    else:
+        gitignore.write_text(f"{linha}\n", encoding="utf-8")
+
+
+def _ler_registros_csv() -> list[dict]:
+    if not CLIENTES_CSV.exists():
+        return []
+    with CLIENTES_CSV.open("r", encoding="utf-8", newline="") as f:
+        return list(csv.DictReader(f))
+
+
+def _salvar_registros_csv(linhas: list[dict]):
+    with CLIENTES_CSV.open("w", encoding="utf-8", newline="") as f:
+        escritor = csv.DictWriter(f, fieldnames=CAMPOS_CSV)
+        escritor.writeheader()
+        escritor.writerows(linhas)
+
+
+def registrar_cliente_publicado(nome_cliente: str, slug: str, link: str, senha: str, total_imagens: int):
+    linhas = _ler_registros_csv()
+    data_str = datetime.now().strftime("%d/%m/%Y %H:%M")
+
+    novo_registro = {
+        "cliente": nome_cliente, "slug": slug, "link": link, "senha": senha,
+        "total_imagens": str(total_imagens), "data": data_str, "status": "ativo",
+    }
+
+    for i, linha in enumerate(linhas):
+        if linha.get("slug") == slug:
+            linhas[i] = novo_registro
+            break
+    else:
+        linhas.append(novo_registro)
+
+    _salvar_registros_csv(linhas)
+
+
+def registrar_cliente_removido(slug: str):
+    linhas = _ler_registros_csv()
+    data_str = datetime.now().strftime("%d/%m/%Y %H:%M")
+
+    for linha in linhas:
+        if linha.get("slug") == slug:
+            linha["status"] = "removido"
+            linha["link"] = "-"
+            linha["senha"] = "-"
+            linha["data"] = data_str
+
+    _salvar_registros_csv(linhas)
+
+
+def listar_clientes():
+    linhas = _ler_registros_csv()
+    ativos = [l for l in linhas if l.get("status") == "ativo"]
+
+    if not ativos:
+        print("Nenhum cliente ativo registrado ainda.")
+        return
+
+    print(f"\n{'CLIENTE':<25} {'LINK':<55} {'SENHA':<15} {'ATUALIZADO EM'}")
+    print("-" * 110)
+    for l in ativos:
+        print(f"{l['cliente']:<25} {l['link']:<55} {l['senha']:<15} {l['data']}")
+    print()
+
+
 def rodar(comando: list[str], cwd: Path):
     resultado = subprocess.run(comando, cwd=cwd, capture_output=True, text=True)
     if resultado.returncode != 0:
         print(resultado.stdout)
         print(resultado.stderr)
         sys.exit(f"Comando falhou: {' '.join(comando)}")
+
+
+def remover_cliente(nome_cliente: str):
+    slug = slugify(nome_cliente)
+    pasta_cliente = REPO_DIR / slug
+
+    if not pasta_cliente.exists():
+        sys.exit(f"Nao existe nenhuma subpasta publicada para '{nome_cliente}' (esperava: {pasta_cliente})")
+
+    print(f"→ Cliente: {nome_cliente}  →  subpasta: /{slug}/")
+    print(f"→ Pasta a ser apagada: {pasta_cliente}")
+
+    confirmacao = input(
+        f"\nTem certeza que quer apagar o tour de '{nome_cliente}'? "
+        f"O link {LINK_GITHUB_PAGES}{slug}/ vai parar de funcionar. "
+        f"Digite SIM para confirmar: "
+    )
+    if confirmacao.strip().upper() != "SIM":
+        sys.exit("Cancelado. Nada foi apagado.")
+
+    shutil.rmtree(pasta_cliente)
+    print("→ Pasta local apagada. Enviando remoção para o GitHub...")
+
+    data = datetime.now().strftime("%d/%m/%Y %H:%M")
+    rodar(["git", "add", "-A"], cwd=REPO_DIR)
+    commit = subprocess.run(
+        ["git", "commit", "-m", f"Remove cliente: {nome_cliente} - {data}"],
+        cwd=REPO_DIR, capture_output=True, text=True,
+    )
+    if commit.returncode != 0 and "nothing to commit" not in commit.stdout.lower():
+        print(commit.stdout)
+        print(commit.stderr)
+        sys.exit("Falha ao commitar a remoção.")
+
+    rodar(["git", "push"], cwd=REPO_DIR)
+
+    registrar_cliente_removido(slug)
+
+    print("\n" + "=" * 50)
+    print("CLIENTE REMOVIDO COM SUCESSO")
+    print("=" * 50)
+    print(f"Cliente : {nome_cliente}")
+    print(f"Link removido: {LINK_GITHUB_PAGES}{slug}/")
+    print("(pode levar 1-2 minutos pra o GitHub Pages atualizar de fato)")
+    print("=" * 50)
 
 
 def publicar_git(repo_dir: Path, cliente: str):
@@ -224,8 +364,10 @@ def publicar_git(repo_dir: Path, cliente: str):
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Publica o tour 360 de um cliente.")
-    parser.add_argument("--cliente", required=True, help="Nome do cliente")
+    parser = argparse.ArgumentParser(description="Publica ou remove o tour 360 de um cliente.")
+    parser.add_argument("--cliente", required=False, help="Nome do cliente (para publicar)")
+    parser.add_argument("--remover", required=False, help="Nome do cliente a remover (apaga local + GitHub)")
+    parser.add_argument("--listar", action="store_true", help="Mostra a lista de clientes ativos e sai")
     parser.add_argument(
         "--pasta", required=False,
         help="(Opcional) Caminho manual da pasta de renders. Se nao informado, "
@@ -237,6 +379,19 @@ def main():
              "(ex: 'noturna') para publicar so aquela categoria.",
     )
     args = parser.parse_args()
+
+    garantir_gitignore()
+
+    if args.listar:
+        listar_clientes()
+        return
+
+    if not args.cliente and not args.remover:
+        sys.exit("Use --cliente \"Nome\" para publicar, ou --remover \"Nome\" para apagar.")
+
+    if args.remover:
+        remover_cliente(args.remover)
+        return
 
     if args.pasta:
         pasta_renders = Path(args.pasta)
@@ -278,6 +433,8 @@ def main():
     publicar_git(REPO_DIR, args.cliente)
 
     link_final = f"{LINK_GITHUB_PAGES}{slug}/"
+
+    registrar_cliente_publicado(args.cliente, slug, link_final, senha, len(imagens))
 
     print("\n" + "=" * 50)
     print("TOUR PUBLICADO COM SUCESSO")
