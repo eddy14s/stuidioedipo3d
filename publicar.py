@@ -1,14 +1,32 @@
 """
 Script de publicacao automatica do Tour Virtual 360.
 
+NOVIDADE: agora cada cliente ganha sua PROPRIA subpasta dentro do mesmo
+repositorio, com link fixo e independente. Publicar um cliente novo NAO
+apaga nem sobrescreve o de outro cliente.
+
+Exemplo de links resultantes:
+    https://eddy14s.github.io/stuidioedipo3d/casa-silva/
+    https://eddy14s.github.io/stuidioedipo3d/apto-joao/
+
 O que ele faz, em ordem:
-  1. Acha a pasta do cliente automaticamente (padrao: NOME_CLIENTE\\render360)
-     e varre todas as subpastas dentro dela (interior, externo, noturna...)
-  2. Copia as imagens pra dentro do projeto, renomeando pra 1.jpg, 2.jpg...
-     (apagando as imagens do cliente anterior antes)
-  3. Atualiza o config.js (quantidade de imagens + gera senha nova)
-  4. Faz commit e push pro GitHub (mesmo repositorio / mesmo link de sempre)
-  5. Mostra o link + senha prontos pra copiar e mandar pro cliente
+  1. Acha a pasta de renders do cliente automaticamente
+     (padrao: NOME_CLIENTE\\render360, varrendo subpastas tipo interior/externo)
+  2. Se for a primeira vez desse cliente, cria a subpasta dele dentro do
+     repositorio, copiando o modelo base (pasta _template)
+  3. Copia as imagens pra dentro da subpasta do cliente, renomeando pra
+     1.jpg, 2.jpg... (apagando as imagens antigas DAQUELE cliente, sem
+     mexer nas de outros clientes)
+  4. Atualiza o config.js daquele cliente (quantidade de imagens + senha nova)
+  5. Faz commit e push pro GitHub (repositorio unico de sempre)
+  6. Mostra o link definitivo daquele cliente + a senha, prontos pra enviar
+
+IMPORTANTE (configuracao unica, antes do primeiro uso):
+  Dentro do repositorio clonado, crie uma pasta chamada "_template" e
+  coloque nela os arquivos base do projeto (index.html, style.css,
+  viewer.js, menu.js, keyboard.js, help.js, navigation.js, device.js,
+  scenes.js, config.js). Essa pasta serve de "molde" pra cada cliente
+  novo. Ela nao e nenhum tour em si, so a base copiada pros outros.
 
 Uso basico (acha a pasta do cliente sozinho):
     python publicar.py --cliente "Casa Silva"
@@ -16,7 +34,7 @@ Uso basico (acha a pasta do cliente sozinho):
 Uso publicando so uma subpasta especifica (ex: so as imagens noturnas):
     python publicar.py --cliente "Casa Silva" --cena "noturna"
 
-Uso apontando uma pasta manualmente (ignora a busca automatica):
+Uso apontando uma pasta de renders manualmente:
     python publicar.py --cliente "Casa Silva" --pasta "C:\\Renders\\CasaSilva"
 """
 
@@ -26,6 +44,7 @@ import re
 import shutil
 import subprocess
 import sys
+import unicodedata
 from datetime import datetime
 from pathlib import Path
 
@@ -33,10 +52,14 @@ from pathlib import Path
 # CONFIGURACAO - ajuste isso UMA VEZ so, de acordo com o seu ambiente
 # ======================================================================
 
-# Pasta do projeto (onde estao o index.html, config.js, etc.)
-PROJETO_DIR = Path(r"E:\0_VS-CODE_STUDIO_3D\SITE-VIZUALIZADOR-360\stuidioedipo3d")
+# Pasta raiz do repositorio clonado (onde fica a pasta _template e onde
+# vao ser criadas as subpastas de cada cliente)
+REPO_DIR = Path(r"E:\0_VS-CODE_STUDIO_3D\SITE-VIZUALIZADOR-360\stuidioedipo3d")
 
-# Link fixo do seu GitHub Pages (o que voce ja manda pro cliente hoje)
+# Pasta modelo (molde) dentro do repositorio, usada pra criar cada cliente novo
+TEMPLATE_DIR = REPO_DIR / "_template"
+
+# Link fixo do seu GitHub Pages (sem a subpasta do cliente no final)
 LINK_GITHUB_PAGES = "https://eddy14s.github.io/stuidioedipo3d/"
 
 # Pasta onde ficam TODOS os projetos de clientes (padrao: NOME_CLIENTE\render360)
@@ -58,6 +81,15 @@ PALAVRAS_SENHA = [
 # ======================================================================
 
 
+def slugify(nome: str) -> str:
+    """Transforma 'Casa Silva' em 'casa-silva': minusculo, sem acento,
+    so letras/numeros/hifen. Usado como nome da subpasta e do link."""
+    nome = unicodedata.normalize("NFKD", nome).encode("ascii", "ignore").decode("ascii")
+    nome = nome.lower().strip()
+    nome = re.sub(r"[^a-z0-9]+", "-", nome).strip("-")
+    return nome or "cliente"
+
+
 def encontrar_pasta_cliente(nome_cliente: str) -> Path:
     """Procura, dentro de PASTA_BASE_CLIENTES, uma pasta cujo nome bata
     (ignorando maiusculas/minusculas e espacos/underscores) com o nome
@@ -73,7 +105,6 @@ def encontrar_pasta_cliente(nome_cliente: str) -> Path:
     ]
 
     if not candidatas:
-        # tenta uma busca mais flexivel (contem o nome, nao so igual)
         candidatas = [
             p for p in PASTA_BASE_CLIENTES.iterdir()
             if p.is_dir() and alvo in p.name.strip().lower().replace(" ", "_")
@@ -94,6 +125,31 @@ def encontrar_pasta_cliente(nome_cliente: str) -> Path:
         )
 
     return candidatas[0]
+
+
+def preparar_pasta_do_cliente(slug: str) -> Path:
+    """Garante que existe uma subpasta pro cliente dentro do repositorio.
+    Se for a primeira vez, copia o modelo base (_template) pra ela."""
+    if not TEMPLATE_DIR.exists():
+        sys.exit(
+            f"Pasta modelo nao encontrada: {TEMPLATE_DIR}\n"
+            f"Crie a pasta '_template' dentro do repositorio com os arquivos "
+            f"base do projeto (veja o topo deste script)."
+        )
+
+    destino = REPO_DIR / slug
+    destino.mkdir(parents=True, exist_ok=True)
+
+    for item in TEMPLATE_DIR.iterdir():
+        if item.name == "imagens_360":
+            continue  # imagens sao tratadas separadamente, nao vem do template
+
+        if item.is_dir():
+            shutil.copytree(item, destino / item.name, dirs_exist_ok=True)
+        else:
+            shutil.copy2(item, destino / item.name)
+
+    return destino
 
 
 def gerar_senha() -> str:
@@ -118,7 +174,8 @@ def listar_imagens(pasta: Path) -> list[Path]:
 
 
 def limpar_e_copiar_imagens(imagens: list[Path], destino: Path) -> str:
-    """Limpa a pasta imagens_360 e copia as novas, renomeando 1,2,3..."""
+    """Limpa a pasta imagens_360 (SO daquele cliente) e copia as novas,
+    renomeando 1,2,3..."""
     if destino.exists():
         shutil.rmtree(destino)
     destino.mkdir(parents=True)
@@ -149,21 +206,21 @@ def rodar(comando: list[str], cwd: Path):
         sys.exit(f"Comando falhou: {' '.join(comando)}")
 
 
-def publicar_git(projeto_dir: Path, cliente: str):
+def publicar_git(repo_dir: Path, cliente: str):
     data = datetime.now().strftime("%d/%m/%Y %H:%M")
-    rodar(["git", "add", "-A"], cwd=projeto_dir)
+    rodar(["git", "add", "-A"], cwd=repo_dir)
 
     # se nao houver mudancas, o commit falha - trata isso sem quebrar o script
     commit = subprocess.run(
         ["git", "commit", "-m", f"Tour: {cliente} - {data}"],
-        cwd=projeto_dir, capture_output=True, text=True,
+        cwd=repo_dir, capture_output=True, text=True,
     )
     if commit.returncode != 0 and "nothing to commit" not in commit.stdout.lower():
         print(commit.stdout)
         print(commit.stderr)
         sys.exit("Falha ao commitar.")
 
-    rodar(["git", "push"], cwd=projeto_dir)
+    rodar(["git", "push"], cwd=repo_dir)
 
 
 def main():
@@ -199,9 +256,13 @@ def main():
         if not pasta_renders.exists():
             sys.exit(f"Subpasta de cena nao encontrada: {pasta_renders}")
 
-    imagens_360_dir = PROJETO_DIR / "imagens_360"
-    config_js = PROJETO_DIR / "config.js"
+    slug = slugify(args.cliente)
+    pasta_destino = preparar_pasta_do_cliente(slug)
 
+    imagens_360_dir = pasta_destino / "imagens_360"
+    config_js = pasta_destino / "config.js"
+
+    print(f"→ Cliente: {args.cliente}  →  subpasta: /{slug}/")
     print(f"→ Lendo imagens de: {pasta_renders}")
     imagens = listar_imagens(pasta_renders)
     print(f"→ {len(imagens)} imagem(ns) encontrada(s)")
@@ -214,19 +275,21 @@ def main():
     atualizar_config_js(config_js, len(imagens), extensao, senha)
 
     print("→ Enviando para o GitHub...")
-    publicar_git(PROJETO_DIR, args.cliente)
+    publicar_git(REPO_DIR, args.cliente)
+
+    link_final = f"{LINK_GITHUB_PAGES}{slug}/"
 
     print("\n" + "=" * 50)
     print("TOUR PUBLICADO COM SUCESSO")
     print("=" * 50)
     print(f"Cliente : {args.cliente}")
-    print(f"Link    : {LINK_GITHUB_PAGES}")
+    print(f"Link    : {link_final}")
     print(f"Senha   : {senha}")
     print("=" * 50)
     print(
         f"\nMensagem pronta para enviar:\n\n"
         f"Ola! Segue o link do seu tour virtual 360°:\n"
-        f"{LINK_GITHUB_PAGES}\n"
+        f"{link_final}\n"
         f"Senha de acesso: {senha}\n"
     )
 
