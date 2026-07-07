@@ -27,7 +27,7 @@ from pathlib import Path
 # ======================================================================
 
 # Pasta do projeto (onde estao o index.html, config.js, etc.)
-PROJETO_DIR = Path(r"E:\0_VS-CODE_STUDIO_3D\SITE-VIZUALIZADOR-360\VERSAO-FINAL_V3")
+PROJETO_DIR = Path(r"E:\0_VS-CODE_STUDIO_3D\SITE-VIZUALIZADOR-360\stuidioedipo3d")
 
 
 # Link fixo do seu GitHub Pages (o que voce ja manda pro cliente hoje)
