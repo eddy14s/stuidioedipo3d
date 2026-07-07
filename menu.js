@@ -14,6 +14,7 @@ function criarMenu() {
     item.onclick = () => {
       currentSceneIndex = index;
       viewer.loadScene(img.id);
+      atualizarIndicadorCena();
     };
 
     menu.appendChild(item);

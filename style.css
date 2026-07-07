@@ -54,6 +54,44 @@ html, body {
   cursor: pointer;
 }
 
+/* ESCOLHA DE DISPOSITIVO */
+.device-options {
+  display: flex;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.device-btn {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 22px 10px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 2px solid rgba(0, 179, 255, 0.25);
+  border-radius: 12px;
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease, transform 0.15s ease;
+}
+
+.device-btn:hover,
+.device-btn:active {
+  background: rgba(0, 179, 255, 0.15);
+  border-color: #00b3ff;
+  transform: translateY(-2px);
+}
+
+.device-icon {
+  font-size: 30px;
+}
+
+.device-btn span:last-child {
+  font-size: 13px;
+  opacity: 0.9;
+}
+
 /* LOADER */
 #loader {
   display: none;
@@ -134,6 +172,64 @@ html, body {
 }
 
 
+/* ===== MODO CELULAR ===== */
+/* menu sai da lateral e vira uma barra inferior; panorama ocupa a tela toda */
+body.device-mobile #panorama {
+  left: 0;
+  width: 100%;
+  height: calc(100vh - 90px);
+}
+
+body.device-mobile #menu {
+  top: auto;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 90px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
+}
+
+body.device-mobile #menu strong {
+  display: none;
+}
+
+body.device-mobile .thumb {
+  flex-direction: column;
+  flex-shrink: 0;
+  margin-bottom: 0;
+  margin-right: 14px;
+  text-align: center;
+  gap: 4px;
+}
+
+body.device-mobile .thumb img {
+  width: 60px;
+  height: 40px;
+}
+
+body.device-mobile .thumb span {
+  font-size: 10px;
+}
+
+body.device-mobile .nav-prev,
+body.device-mobile .nav-next {
+  top: calc((100vh - 90px) / 2);
+}
+
+body.device-mobile .nav-prev { left: 15px; }
+body.device-mobile .nav-next { right: 15px; }
+
+body.device-mobile #help-btn {
+  bottom: 100px;
+}
+/* ===== FIM MODO CELULAR ===== */
+
+
 /* botao de help */
 
 #help-btn {
@@ -181,6 +277,54 @@ html, body {
 
 /* botao de help */
 
+
+/* SETAS DE NAVEGAÇÃO (funcionam também em tela cheia) */
+.nav-arrow {
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1500;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.55);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  cursor: pointer;
+  user-select: none;
+  backdrop-filter: blur(6px);
+  transition: background 0.2s ease, transform 0.15s ease;
+}
+
+.nav-arrow:hover {
+  background: rgba(0, 0, 0, 0.85);
+}
+
+.nav-arrow:active {
+  transform: translateY(-50%) scale(0.9);
+}
+
+.nav-prev { left: 240px; }
+.nav-next { right: 20px; }
+
+/* INDICADOR DE CENA */
+#scene-indicator {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1500;
+  background: rgba(0, 0, 0, 0.55);
+  color: #fff;
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: 13px;
+  backdrop-filter: blur(6px);
+  white-space: nowrap;
+}
 
 /* MODAL AJUDA */
 #help-modal {

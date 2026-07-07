@@ -4,6 +4,7 @@ function loadSceneByIndex(index) {
 
   currentSceneIndex = index;
   viewer.loadScene(imagens360[index].id);
+  atualizarIndicadorCena();
 }
 
 document.addEventListener("keydown", e => {

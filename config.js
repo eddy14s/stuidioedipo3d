@@ -1,22 +1,6 @@
 const CONFIG = {
-  pasta: "imagens_360",
+  pasta: "imagens_360/",
   extensao: "jpg",
-  totalImagens: 2
+  totalImagens: 5, // ⬅️ ajuste aqui só isso
+  senha: "7775"    // ⬅️ o script de publicação atualiza isso automaticamente
 };
-
-function getAssetPath(fileName) {
-  const cleanFile = String(fileName).replace(/^\/+/, "");
-  const cleanFolder = CONFIG.pasta.replace(/^\/+|\/+$/g, "");
-  const isGitHubPages = window.location.hostname.endsWith("github.io");
-
-  if (!isGitHubPages) {
-    return `${cleanFolder}/${cleanFile}`;
-  }
-
-  const firstPathSegment = window.location.pathname.split("/").filter(Boolean)[0] || "";
-  if (!firstPathSegment) {
-    return `${cleanFolder}/${cleanFile}`;
-  }
-
-  return `/${firstPathSegment}/${cleanFolder}/${cleanFile}`.replace(/\/{2,}/g, "/");
-}
