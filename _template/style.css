@@ -201,7 +201,7 @@ html, body {
   backdrop-filter: blur(6px);
   padding: 15px;
   box-sizing: border-box;
-  z-index: 999999;
+  z-index: 2147483647;
 
   display: flex;
   flex-direction: row;
@@ -213,6 +213,55 @@ html, body {
 
 #menu strong {
   display: none;
+}
+
+/* Oculta a galeria inferior quando o usuário clica no botão de ocultar */
+body.galeria-oculta #menu {
+  display: none;
+}
+
+body.galeria-oculta #panorama {
+  height: 100vh;
+}
+
+body.galeria-oculta .nav-arrow {
+  top: 50%;
+}
+
+body.galeria-oculta #back-btn,
+body.galeria-oculta #help-btn {
+  bottom: 20px;
+}
+
+body.galeria-oculta .toggle-galeria-btn {
+  bottom: 20px;
+}
+
+/* Botão de mostrar/ocultar a galeria */
+.toggle-galeria-btn {
+  position: fixed;
+  bottom: 100px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2147483647;
+
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  cursor: pointer;
+
+  backdrop-filter: blur(6px);
+  transition: background 0.2s ease, bottom 0.2s ease;
+}
+
+.toggle-galeria-btn:hover {
+  background: rgba(0, 0, 0, 0.85);
 }
 
 /* THUMB */
@@ -255,7 +304,7 @@ html, body {
   position: fixed;
   left: 20px;
   bottom: 100px;
-  z-index: 999999;
+  z-index: 2147483647;
 
   background: rgba(0, 0, 0, 0.7);
   color: #fff;
@@ -278,7 +327,7 @@ html, body {
   position: fixed;
   right: 20px;
   bottom: 100px;
-  z-index: 999999;
+  z-index: 2147483647;
 
   background: rgba(0, 0, 0, 0.7);
   color: #fff;
@@ -300,28 +349,30 @@ html, body {
   position: fixed;
   top: calc((100vh - 90px) / 2);
   transform: translateY(-50%);
-  z-index: 999999;
+  z-index: 2147483647;
   width: 48px;
   height: 48px;
-  border-radius: 50%;
-  background: rgba(0, 0, 0, 0.55);
+  background: none;
+  border: none;
   color: #fff;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 20px;
+  font-size: 34px;
   cursor: pointer;
   user-select: none;
-  backdrop-filter: blur(6px);
-  transition: background 0.2s ease, transform 0.15s ease;
+  filter: drop-shadow(0 1px 4px rgba(0, 0, 0, 0.85));
+  transition: transform 0.15s ease, opacity 0.15s ease;
+  opacity: 0.85;
 }
 
 .nav-arrow:hover {
-  background: rgba(0, 0, 0, 0.85);
+  opacity: 1;
+  transform: translateY(-50%) scale(1.15);
 }
 
 .nav-arrow:active {
-  transform: translateY(-50%) scale(0.9);
+  transform: translateY(-50%) scale(0.95);
 }
 
 .nav-prev { left: 15px; }
@@ -333,7 +384,7 @@ html, body {
   top: 20px;
   left: 50%;
   transform: translateX(-50%);
-  z-index: 999999;
+  z-index: 2147483647;
   background: rgba(0, 0, 0, 0.55);
   color: #fff;
   padding: 6px 16px;
@@ -378,6 +429,27 @@ html, body {
   border: none;
   border-radius: 6px;
   cursor: pointer;
+}
+
+/* Reforço: garante que nossos controles fiquem sempre acima de QUALQUER
+   elemento interno do Pannellum, inclusive quando ele reage à mudança
+   para tela cheia (fullscreen é acionado no <html>, então tudo aqui
+   dentro é descendente do elemento em fullscreen). */
+:fullscreen .nav-arrow,
+:fullscreen #scene-indicator,
+:fullscreen #menu,
+:fullscreen #help-btn,
+:fullscreen #back-btn,
+:fullscreen .toggle-galeria-btn,
+:-webkit-full-screen .nav-arrow,
+:-webkit-full-screen #scene-indicator,
+:-webkit-full-screen #menu,
+:-webkit-full-screen #help-btn,
+:-webkit-full-screen #back-btn,
+:-webkit-full-screen .toggle-galeria-btn {
+  z-index: 2147483647 !important;
+  pointer-events: auto !important;
+  opacity: 1;
 }
 
 

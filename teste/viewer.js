@@ -20,4 +20,5 @@ function iniciarTour() {
   ativarAjuda();
   criarSetasNavegacao();
   criarIndicadorCena();
+  criarBotaoGaleria();
 }
