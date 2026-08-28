@@ -196,7 +196,7 @@ html, body {
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 90px;
+  height: 120px;
   background: rgba(0, 0, 0, 0.75);
   backdrop-filter: blur(6px);
   padding: 15px;
@@ -278,8 +278,8 @@ body.galeria-oculta .toggle-galeria-btn {
 }
 
 .thumb img {
-  width: 60px;
-  height: 40px;
+  width: 130px;
+  height: 80px;
   object-fit: cover;
   border-radius: 6px;
   flex-shrink: 0;
@@ -301,9 +301,10 @@ body.galeria-oculta .toggle-galeria-btn {
 
 /* botao de voltar / trocar modo */
 #back-btn {
-  position: fixed;
+  position: absolute;
   left: 20px;
-  bottom: 100px;
+
+  bottom: 125px;
   z-index: 2147483647;
 
   background: rgba(0, 0, 0, 0.7);
@@ -326,7 +327,7 @@ body.galeria-oculta .toggle-galeria-btn {
 #help-btn {
   position: fixed;
   right: 20px;
-  bottom: 100px;
+  bottom: 12px;
   z-index: 2147483647;
 
   background: rgba(0, 0, 0, 0.7);
@@ -380,6 +381,7 @@ body.galeria-oculta .toggle-galeria-btn {
 
 /* INDICADOR DE CENA */
 #scene-indicator {
+  display: none;
   position: fixed;
   top: 20px;
   left: 50%;
