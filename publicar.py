@@ -66,7 +66,7 @@ from pathlib import Path
 
 # Pasta raiz do repositorio clonado (onde fica a pasta _template e onde
 # vao ser criadas as subpastas de cada cliente)
-REPO_DIR = Path(r"E:\0_VS-CODE_STUDIO_3D\SITE-VIZUALIZADOR-360\stuidioedipo3d")
+REPO_DIR = Path(r"E:\4_VS-CODE_STUDIO_3D\SITE-VIZUALIZADOR-360\stuidioedipo3d")
 
 # Pasta modelo (molde) dentro do repositorio, usada pra criar cada cliente novo
 TEMPLATE_DIR = REPO_DIR / "_template"
