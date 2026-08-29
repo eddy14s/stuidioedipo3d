@@ -1,6 +1,0 @@
-const CONFIG = {
-  pasta: "imagens_360/",
-  extensao: "jpg",
-  totalImagens: 5, // ⬅️ ajuste aqui só isso
-  senha: "Alameda136"    // ⬅️ o script de publicação atualiza isso automaticamente
-};
