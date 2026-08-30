@@ -9,7 +9,6 @@ const CONFIG = {
     2: "Lavabo",
     3: "Banho Suíte01",
     4: "Banho Hospedes"
-    4: "Banho 03"
-    
+    5: "Banho 03"
   }
 };
