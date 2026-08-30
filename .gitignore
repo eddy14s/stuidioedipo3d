@@ -3,3 +3,4 @@ publicar.py
 *.zip
 Abrir Publicador.bat
 publicar_gui.py
+__pycache__
