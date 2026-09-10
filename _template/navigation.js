@@ -49,12 +49,13 @@ function criarBotaoGaleria() {
 
   // remove botao antigo, caso o tour seja iniciado mais de uma vez na sessão
   document.getElementById("toggle-galeria")?.remove();
+  document.body.classList.add("galeria-oculta");
 
   const btn = document.createElement("div");
   btn.id = "toggle-galeria";
   btn.className = "toggle-galeria-btn";
   btn.innerHTML = "🖼";
-  btn.setAttribute("aria-label", "Mostrar ou ocultar a galeria de cenas");
+  btn.setAttribute("aria-label", "Mostrar galeria de cenas");
 
   btn.onclick = () => {
     const oculta = document.body.classList.toggle("galeria-oculta");

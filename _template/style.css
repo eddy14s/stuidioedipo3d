@@ -277,13 +277,181 @@ body.galeria-oculta #help-btn {
 
 body.galeria-oculta .toggle-galeria-btn {
   bottom: 20px;
+  left: 116px;
+  transform: none;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  box-sizing: border-box;
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  border-radius: 50%;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+}
+
+body.galeria-oculta #back-btn {
+  position: fixed;
+  left: 68px;
+  bottom: 20px;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  box-sizing: border-box;
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  border-radius: 50%;
+  background: rgba(12, 18, 28, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+}
+
+body.galeria-oculta .pnlm-fullscreen-toggle-button,
+body.galeria-oculta .pnlm-fullscreen-toggle-button-inactive,
+body.galeria-oculta .pnlm-fullscreen-toggle-button-active {
+  position: fixed;
+  left: 20px;
+  right: auto;
+  bottom: 20px;
+  width: 40px !important;
+  height: 40px !important;
+  color: #000000 !important;
+  font-size: 0;
+  
+}
+
+body.galeria-oculta .pnlm-fullscreen-toggle-button::after,
+body.galeria-oculta .pnlm-fullscreen-toggle-button-inactive::after,
+body.galeria-oculta .pnlm-fullscreen-toggle-button-active::after {
+  content: "⛶";
+  display: block;
+  font-size: 35px;
+  line-height: 38px;
+}
+
+body.galeria-oculta #help-btn {
+  left: 164px;
+  right: auto;
+  width: 76px;
+  height: 40px;
+  padding: 14px;
+  box-sizing: border-box;
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  border-radius: 20px;
+  background: rgba(12, 18, 28, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+  line-height: 1;
+  white-space: nowrap;
+  display: none;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+}
+
+body.galeria-oculta #help-btn::after {
+  content: none;
+}
+
+body.galeria-oculta .pnlm-zoom-out,
+body.galeria-oculta .pnlm-zoom-in {
+  display: none;
+}
+
+body.galeria-oculta .pnlm-controls {
+  background-color: transparent !important;
+  border: none !important;
+}
+
+body.galeria-oculta .toggle-galeria-btn,
+body.galeria-oculta .pnlm-fullscreen-toggle-button,
+body.galeria-oculta .pnlm-fullscreen-toggle-button-inactive,
+body.galeria-oculta .pnlm-fullscreen-toggle-button-active,
+body.galeria-oculta #help-btn {
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  background: rgba(12, 18, 28, 0.9);
+  color: #fff;
+}
+
+body:not(.galeria-oculta) .toggle-galeria-btn {
+  left: 15px;
+  bottom: 162px;
+  transform: none;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  box-sizing: border-box;
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  border-radius: 50%;
+  background: rgba(12, 18, 28, 0.9);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+}
+
+body:not(.galeria-oculta) .pnlm-controls-container {
+  display: none;
+}
+
+body:not(.galeria-oculta) #back-btn {
+  position: fixed;
+  left: 68px;
+  bottom: 162px;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  box-sizing: border-box;
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  border-radius: 50%;
+  background: rgba(12, 18, 28, 0.9);
+  align-items: center;
+  justify-content: center;
+  display: none;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+}
+
+body:not(.galeria-oculta) .pnlm-fullscreen-toggle-button,
+body:not(.galeria-oculta) .pnlm-fullscreen-toggle-button-inactive,
+body:not(.galeria-oculta) .pnlm-fullscreen-toggle-button-active {
+  display: none !important;
+}
+
+body:not(.galeria-oculta) .pnlm-zoom-in,
+body:not(.galeria-oculta) .pnlm-zoom-out {
+  display: none !important;
+}
+
+body:not(.galeria-oculta) #help-btn {
+  display: none;
+  left: 164px;
+  right: auto;
+  bottom: 162px;
+  width: 76px;
+  height: 40px;
+  padding: 14px;
+  box-sizing: border-box;
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  border-radius: 20px;
+  background: rgba(12, 18, 28, 0.9);
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1;
+  white-space: nowrap;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+}
+
+body:not(.galeria-oculta) #help-btn::after {
+  content: none;
 }
 
 /* Botão de mostrar/ocultar a galeria */
 .toggle-galeria-btn {
   position: fixed;
-  bottom: 100px;
-  left: 50%;
+  bottom: 162px;
+  left: 6%;
   transform: translateX(-50%);
   z-index: 2147483647;
 
@@ -346,12 +514,12 @@ body.galeria-oculta .toggle-galeria-btn {
   position: absolute;
   left: 20px;
 
-  bottom: 160px;
+  bottom: 162px;
   z-index: 2147483647;
 
   background: rgba(0, 0, 0, 0.7);
   color: #fff;
-  padding: 10px 14px;
+  padding: 10px 10px;
   border-radius: 30px;
   font-size: 14px;
   cursor: pointer;
@@ -369,7 +537,7 @@ body.galeria-oculta .toggle-galeria-btn {
 #help-btn {
   position: fixed;
   right: 20px;
-  bottom: 12px;
+  bottom: 162px;
   z-index: 2147483647;
 
   background: rgba(0, 0, 0, 0.7);
@@ -496,6 +664,9 @@ body.galeria-oculta .toggle-galeria-btn {
   opacity: 1;
 }
 
-
-
-
+/* A ajuda fica desativada enquanto a galeria estiver aberta. */
+body:not(.galeria-oculta) #help-btn {
+  display: none !important;
+  visibility: hidden;
+  pointer-events: none;
+}
