@@ -5,7 +5,7 @@ const CONFIG = {
   senha: "Jasmim433",
   capa: "imagens_360/1.jpg",
   titulos: {
-    1: "SALA_TV_JANTAR_1",
-    2: "SALA_TV_JANTAR_2"
+    1: "LIVING_V2",
+    2: "LIVING_V1"
   }
 };
