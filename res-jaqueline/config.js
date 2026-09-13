@@ -5,10 +5,15 @@ const CONFIG = {
   senha: "Serra917",
   capa: "imagens_360/1.jpg",
   titulos: {
-    1: "Banho Piscina",
-    2: "Lavabo",
-    3: "Banho Suíte01",
-    4: "Banho Hospedes",
-    5: "Banho 03"
+    1: "SALA_V1",
+    2: "SALA_V2",
+    3: "COZINHA",
+    4: "LAVANDERIA",
+    5: "LAVABO",
+    6: "BANHEIRO_01",
+    7: "BANHEIRO_02",
+    8: "BANHEIRO_03",
+    9: "BANHEIRO_05",
+    10: "BANHEIRO_05"
   }
 };
