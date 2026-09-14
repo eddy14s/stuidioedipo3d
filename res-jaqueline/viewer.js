@@ -11,7 +11,9 @@ function iniciarTour() {
       firstScene: imagens360[0].id,
       sceneFadeDuration: 1000,
       autoLoad: true,
-      showControls: true
+      showControls: true,
+      hfov: 120,
+      maxHfov: 120
     },
     scenes: scenes
   });
