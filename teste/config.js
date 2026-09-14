@@ -1,12 +1,9 @@
 const CONFIG = {
   pasta: "imagens_360/",
   extensao: "jpg",
-  extensoes: {
-    // defina aqui apenas as imagens que fogem do padrao acima
-    // exemplo: 3: "png"
-  },
-  totalImagens: 10,
-  senha: "Jasmim433",
+  extensoes: {},
+  totalImagens: 4,
+  senha: "Rocha698",
   capa: "imagens_360/1.jpg",
   titulos: {
     1: "Banho Piscina",
@@ -25,3 +22,4 @@ const CONFIG = {
     7: { yaw: 0, pitch: 0 }
   }
 };
+
