@@ -589,6 +589,49 @@ body:not(.galeria-oculta) #help-btn::after {
 .nav-prev { left: 15px; }
 .nav-next { right: 15px; }
 
+/* PAINEL DO EDITOR DE POSIÇÃO (uso interno, com ?editor=1) */
+#editor-panel {
+  display: none;
+  flex-direction: column;
+  gap: 8px;
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2147483647;
+  background: rgba(0, 0, 0, 0.75);
+  color: #fff;
+  padding: 12px 18px;
+  border-radius: 12px;
+  font-size: 13px;
+  backdrop-filter: blur(6px);
+  text-align: center;
+}
+
+#editor-panel .editor-panel-botoes {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+}
+
+#editor-panel button {
+  background: #2f8f4e;
+  color: #fff;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+#editor-panel button:last-child {
+  background: #444;
+}
+
+#editor-panel button:hover {
+  opacity: 0.85;
+}
+
 /* INDICADOR DE CENA */
 #scene-indicator {
   display: none;

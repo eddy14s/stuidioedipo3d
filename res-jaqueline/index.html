@@ -85,6 +85,16 @@
 
   <div id="panorama"></div>
 
+  <!-- 🎯 PAINEL DO EDITOR DE POSIÇÃO (só aparece com ?editor=1 na URL) -->
+  <div id="editor-panel" style="display:none;">
+    <strong>🎯 Editor de posição</strong>
+    <span id="editor-status">carregando...</span>
+    <div class="editor-panel-botoes">
+      <button type="button" onclick="salvarPosicaoAtual()">💾 Salvar posição desta cena</button>
+      <button type="button" onclick="copiarBlocoConfig()">📋 Copiar bloco pro config.js</button>
+    </div>
+  </div>
+
 </div>
 
 <!-- SCRIPTS -->
@@ -98,6 +108,7 @@
 <script src="help.js"></script>
 <script src="navigation.js"></script>
 <script src="device.js"></script>
+<script src="editor.js"></script>
 
 <!-- CONTROLE DE ENTRADA -->
 <script>
@@ -120,6 +131,7 @@ function entrarNoTour() {
 
     // inicia o tour AGORA
     iniciarTour();
+    iniciarEditorPosicao();
 
     document.documentElement.requestFullscreen?.();
   }, 1200);
