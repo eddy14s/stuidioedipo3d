@@ -13,13 +13,10 @@ const CONFIG = {
     5: "Banho 03"
   },
   posicoes: {
-    1: { yaw: 0, pitch: 0 },
-    2: { yaw: 0, pitch: 0 },
-    3: { yaw: 0, pitch: 0 },
-    4: { yaw: 0, pitch: 0 },
-    5: { yaw: 0, pitch: 0 },
-    6: { yaw: 0, pitch: 0 },
-    7: { yaw: 0, pitch: 0 }
+    1: { yaw: 52, pitch: -2 },
+    2: { yaw: -65, pitch: -17 },
+    3: { yaw: 150, pitch: -26 },
+    4: { yaw: 143, pitch: -16 }
   }
 };
 
