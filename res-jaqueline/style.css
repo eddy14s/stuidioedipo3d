@@ -1,8 +1,17 @@
+:root {
+  --cor-fundo: #1b2329;
+  --cor-painel: #232e36;
+  --cor-accent: #ffde59;
+  --cor-accent-escuro: #e0bc3f;
+  --cor-texto: #f4f4f4;
+  --fonte-titulo: "Rajdhani", Arial, sans-serif;
+}
+
 html, body {
   margin: 0;
   height: 100%;
-  background: #000;
-  color: #fff;
+  background: var(--cor-fundo);
+  color: var(--cor-texto);
   font-family: Arial, sans-serif;
 }
 
@@ -29,11 +38,33 @@ html, body {
 }
 
 .landing-box {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
-  background: rgba(0,0,0,0.7);
+  background: linear-gradient(180deg, var(--cor-painel), var(--cor-fundo));
   padding: 40px;
-  border-radius: 14px;
-  max-width: 420px;
+  border-radius: 4px 18px 18px 18px;
+  width: min(420px, 90vw);
+  box-sizing: border-box;
+  border: 1px solid rgba(255, 222, 89, 0.18);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45);
+}
+
+.landing-box #step-device,
+.landing-box #step-password {
+  width: 100%;
+}
+
+.landing-box h1 {
+  font-family: var(--fonte-titulo);
+  font-weight: 700;
+  letter-spacing: 0.03em;
+}
+
+.landing-box p {
+  color: rgba(244, 244, 244, 0.75);
 }
 
 .logo {
@@ -56,7 +87,7 @@ html, body {
   font-weight: 500;
   letter-spacing: 0.4em;
   text-transform: uppercase;
-  color: #f0cf5c;
+  color: var(--cor-accent);
   white-space: nowrap;
 }
 
@@ -142,8 +173,16 @@ html, body {
   padding-right: 44px;
   margin: 15px 0;
   border-radius: 8px;
-  border: none;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(0, 0, 0, 0.25);
+  color: var(--cor-texto);
   box-sizing: border-box;
+  transition: border-color 0.2s ease;
+}
+
+.input-password:focus {
+  outline: none;
+  border-color: var(--cor-accent);
 }
 
 .toggle-senha-btn {
@@ -164,17 +203,32 @@ html, body {
   padding: 12px 26px;
   border: none;
   border-radius: 8px;
-  background: #00b3ff;
-  color: #000;
-  font-weight: bold;
+  background: var(--cor-accent);
+  color: #1b2329;
+  font-family: var(--fonte-titulo);
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
   cursor: pointer;
+  transition: filter 0.15s ease, transform 0.15s ease;
+}
+
+.btn:hover {
+  filter: brightness(1.08);
+  transform: translateY(-1px);
+}
+
+.btn:active {
+  transform: translateY(0);
 }
 
 /* ESCOLHA DE DISPOSITIVO */
 .device-options {
   display: flex;
+  width: 100%;
   gap: 15px;
   margin-top: 20px;
+  box-sizing: border-box;
 }
 
 .device-btn {
@@ -184,8 +238,8 @@ html, body {
   align-items: center;
   gap: 8px;
   padding: 22px 10px;
-  background: rgba(255, 255, 255, 0.06);
-  border: 2px solid rgba(0, 179, 255, 0.25);
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px solid rgba(255, 222, 89, 0.2);
   border-radius: 12px;
   color: #fff;
   cursor: pointer;
@@ -194,8 +248,8 @@ html, body {
 
 .device-btn:hover,
 .device-btn:active {
-  background: rgba(0, 179, 255, 0.15);
-  border-color: #00b3ff;
+  background: rgba(255, 222, 89, 0.12);
+  border-color: var(--cor-accent);
   transform: translateY(-2px);
 }
 
@@ -288,7 +342,7 @@ html, body {
   font-size: 18px;
   padding: 16px 38px;
   border-radius: 50px;
-  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 4px 22px rgba(255, 222, 89, 0.35);
 }
 
 .btn-play:hover {
@@ -311,7 +365,7 @@ html, body {
   width: 50px;
   height: 50px;
   border: 4px solid #333;
-  border-top: 4px solid #00b3ff;
+  border-top: 4px solid var(--cor-accent);
   border-radius: 50%;
   animation: spin 1s linear infinite;
   margin-bottom: 15px;
@@ -669,6 +723,7 @@ body:not(.galeria-oculta) #help-btn::after {
 
 .nav-arrow:hover {
   opacity: 1;
+  color: var(--cor-accent);
   transform: translateY(-50%) scale(1.15);
 }
 
@@ -705,17 +760,19 @@ body:not(.galeria-oculta) #help-btn::after {
 }
 
 #editor-panel button {
-  background: #2f8f4e;
-  color: #fff;
+  background: var(--cor-accent);
+  color: #1b2329;
   border: none;
   padding: 8px 12px;
   border-radius: 8px;
   font-size: 13px;
+  font-weight: 700;
   cursor: pointer;
 }
 
 #editor-panel button:last-child {
   background: #444;
+  color: #fff;
 }
 
 #editor-panel button:hover {
@@ -752,15 +809,19 @@ body:not(.galeria-oculta) #help-btn::after {
 }
 
 #help-content {
-  background: #111;
+  background: var(--cor-painel);
   padding: 25px 30px;
   border-radius: 14px;
   max-width: 320px;
   text-align: center;
+  border: 1px solid rgba(255, 222, 89, 0.18);
+  font-family: Arial, sans-serif;
 }
 
 #help-content h2 {
   margin-top: 0;
+  font-family: var(--fonte-titulo);
+  color: var(--cor-accent);
 }
 
 #help-content ul {
@@ -774,6 +835,9 @@ body:not(.galeria-oculta) #help-btn::after {
   border: none;
   border-radius: 6px;
   cursor: pointer;
+  background: var(--cor-accent);
+  color: #1b2329;
+  font-weight: 700;
 }
 
 /* Reforço: garante que nossos controles fiquem sempre acima de QUALQUER
