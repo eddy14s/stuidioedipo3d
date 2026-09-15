@@ -41,6 +41,96 @@ html, body {
   margin-bottom: 15px;
 }
 
+/* MARCA DO ESTÚDIO (STUDIO + logo) -- usada na tela inicial (grande, com
+   entrada suave) e dentro do tour (pequena, discreta, fixa no canto) */
+.marca-estudio {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  user-select: none;
+}
+
+.marca-estudio__studio {
+  font-family: "Rajdhani", Arial, sans-serif;
+  font-weight: 500;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: #f0cf5c;
+  white-space: nowrap;
+}
+
+.marca-estudio__img {
+  display: block;
+  height: auto;
+}
+
+/* --- versão da tela inicial: maior, com entrada suave ao carregar --- */
+.marca-estudio--landing {
+  margin-bottom: 22px;
+  animation: marcaEntrada 900ms ease-out both;
+}
+
+.marca-estudio--landing .marca-estudio__studio {
+  font-size: 13px;
+}
+
+.marca-estudio--landing .marca-estudio__img {
+  width: 190px;
+}
+
+@keyframes marcaEntrada {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+    filter: blur(2px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+/* --- versão dentro do tour: pequena, discreta, não atrapalha a vista --- */
+.marca-estudio--tour {
+  position: fixed;
+  top: 16px;
+  left: 16px;
+  z-index: 2147483000;
+  gap: 6px;
+  padding: 6px 10px;
+  background: rgba(0, 0, 0, 0.28);
+  border-radius: 10px;
+  backdrop-filter: blur(4px);
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.marca-estudio--tour .marca-estudio__studio {
+  font-size: 8px;
+}
+
+.marca-estudio--tour .marca-estudio__img {
+  width: 68px;
+}
+
+@media (max-width: 480px) {
+  .marca-estudio--tour {
+    top: 10px;
+    left: 10px;
+    padding: 4px 8px;
+  }
+
+  .marca-estudio--tour .marca-estudio__img {
+    width: 52px;
+  }
+
+  .marca-estudio--tour .marca-estudio__studio {
+    font-size: 7px;
+  }
+}
+
 .password-wrapper {
   position: relative;
   width: 100%;
@@ -705,6 +795,12 @@ body:not(.galeria-oculta) #help-btn::after {
   z-index: 2147483647 !important;
   pointer-events: auto !important;
   opacity: 1;
+}
+
+:fullscreen .marca-estudio--tour,
+:-webkit-full-screen .marca-estudio--tour {
+  z-index: 2147483647 !important;
+  opacity: 0.6;
 }
 
 /* A ajuda fica desativada enquanto a galeria estiver aberta. */

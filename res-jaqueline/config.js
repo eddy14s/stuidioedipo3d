@@ -5,7 +5,7 @@ const CONFIG = {
     // defina aqui apenas as imagens que fogem do padrao acima
     // exemplo: 3: "png"
   },
-  totalImagens: 9,
+  totalImagens: 10,
   senha: "Jasmim433",
   capa: "imagens_360/1.jpg",
   titulos: {
@@ -25,3 +25,4 @@ const CONFIG = {
     7: { yaw: 0, pitch: 0 }
   }
 };
+
