@@ -6,11 +6,15 @@ const CONFIG = {
   senha: "Jasmim930",
   capa: "imagens_360/1.jpg",
   titulos: {
-    1: "Banho Piscina",
-    2: "Lavabo",
-    3: "Banho Suíte01",
-    4: "Banho Hospedes",
-    5: "Banho 03"
+    1: "LIVING",
+    2: "CIRCULAÇÃO",
+    3: "GOURMET",
+    4: "LAVANDERIA",
+    5: "LAVABO",
+    6: "BANHEIRO_01",
+    7: "BANHEIRO_02",
+    8: "BANHEIRO_03",
+    9: "BANHEIRO_04"
   },
   posicoes: {
     // define pra onde a camera aponta ao abrir cada imagem (em graus)
