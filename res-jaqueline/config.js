@@ -16,11 +16,16 @@ const CONFIG = {
     8: "BANHEIRO_03",
     9: "BANHEIRO_04"
   },
-  posicoes: {
-    // define pra onde a camera aponta ao abrir cada imagem (em graus)
-    // yaw: 0 a 360 (direcao horizontal) | pitch: -90 a 90 (pra cima/baixo)
-    // so precisa listar as imagens que quer travar; o resto abre de frente (yaw 0)
-    // exemplo: 2: { yaw: 145, pitch: -5 }
+posicoes: {
+    1: { yaw: 136, pitch: -21 },
+    2: { yaw: -45, pitch: -13 },
+    3: { yaw: 71, pitch: 1 },
+    4: { yaw: -17, pitch: -8 },
+    5: { yaw: -115, pitch: -12 },
+    6: { yaw: -15, pitch: -30 },
+    7: { yaw: 148, pitch: -11 },
+    8: { yaw: -128, pitch: -15 },
+    9: { yaw: 146, pitch: -1 }
   },
   hotspots: {
     // pontos clicaveis DENTRO de uma imagem que levam pra outra cena
