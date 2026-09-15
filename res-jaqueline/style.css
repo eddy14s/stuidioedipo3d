@@ -1,0 +1,967 @@
+:root {
+  --cor-fundo: #1b2329;
+  --cor-painel: #232e36;
+  --cor-accent: #ffde59;
+  --cor-accent-escuro: #e0bc3f;
+  --cor-texto: #f4f4f4;
+  --fonte-titulo: "Rajdhani", Arial, sans-serif;
+}
+
+html, body {
+  margin: 0;
+  height: 100%;
+  background: var(--cor-fundo);
+  color: var(--cor-texto);
+  font-family: Arial, sans-serif;
+}
+
+#panorama {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: calc(100vh - 90px);
+  background: #000;
+}
+
+/* Remove o link de créditos "Pannellum" que aparece por padrão no visualizador */
+.pnlm-about-msg {
+  display: none !important;
+}
+
+
+/* LANDING */
+.landing {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.landing-box {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  background: linear-gradient(180deg, var(--cor-painel), var(--cor-fundo));
+  padding: 40px;
+  border-radius: 4px 18px 18px 18px;
+  width: min(420px, 90vw);
+  box-sizing: border-box;
+  border: 1px solid rgba(255, 222, 89, 0.18);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45);
+}
+
+.landing-box #step-device,
+.landing-box #step-password {
+  width: 100%;
+}
+
+.landing-box h1 {
+  font-family: var(--fonte-titulo);
+  font-weight: 700;
+  letter-spacing: 0.03em;
+}
+
+.landing-box p {
+  color: rgba(244, 244, 244, 0.75);
+}
+
+.logo {
+  max-width: 120px;
+  margin-bottom: 15px;
+}
+
+/* MARCA DO ESTÚDIO (STUDIO + logo) -- usada na tela inicial (grande, com
+   entrada suave) e dentro do tour (pequena, discreta, fixa no canto) */
+.marca-estudio {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  user-select: none;
+}
+
+.marca-estudio__studio {
+  font-family: "Rajdhani", Arial, sans-serif;
+  font-weight: 500;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--cor-accent);
+  white-space: nowrap;
+}
+
+.marca-estudio__img {
+  display: block;
+  height: auto;
+}
+
+/* --- versão da tela inicial: maior, com entrada suave ao carregar --- */
+.marca-estudio--landing {
+  margin-bottom: 22px;
+  animation: marcaEntrada 900ms ease-out both;
+}
+
+.marca-estudio--landing .marca-estudio__studio {
+  font-size: 13px;
+}
+
+.marca-estudio--landing .marca-estudio__img {
+  width: 190px;
+}
+
+@keyframes marcaEntrada {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+    filter: blur(2px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+/* --- versão dentro do tour: pequena, discreta, não atrapalha a vista --- */
+.marca-estudio--tour {
+  position: fixed;
+  top: 16px;
+  left: 16px;
+  z-index: 2147483000;
+  gap: 6px;
+  padding: 6px 10px;
+  background: rgba(0, 0, 0, 0.28);
+  border-radius: 10px;
+  backdrop-filter: blur(4px);
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.marca-estudio--tour .marca-estudio__studio {
+  font-size: 8px;
+}
+
+.marca-estudio--tour .marca-estudio__img {
+  width: 68px;
+}
+
+@media (max-width: 480px) {
+  .marca-estudio--tour {
+    top: 10px;
+    left: 10px;
+    padding: 4px 8px;
+  }
+
+  .marca-estudio--tour .marca-estudio__img {
+    width: 52px;
+  }
+
+  .marca-estudio--tour .marca-estudio__studio {
+    font-size: 7px;
+  }
+}
+
+.password-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.input-password {
+  width: 100%;
+  padding: 12px;
+  padding-right: 44px;
+  margin: 15px 0;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(0, 0, 0, 0.25);
+  color: var(--cor-texto);
+  box-sizing: border-box;
+  transition: border-color 0.2s ease;
+}
+
+.input-password:focus {
+  outline: none;
+  border-color: var(--cor-accent);
+}
+
+.toggle-senha-btn {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  margin-top: -7px; /* compensa a margem vertical do input */
+  background: none;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+  padding: 4px 6px;
+  line-height: 1;
+}
+
+.btn {
+  padding: 12px 26px;
+  border: none;
+  border-radius: 8px;
+  background: var(--cor-accent);
+  color: #1b2329;
+  font-family: var(--fonte-titulo);
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: filter 0.15s ease, transform 0.15s ease;
+}
+
+.btn:hover {
+  filter: brightness(1.08);
+  transform: translateY(-1px);
+}
+
+.btn:active {
+  transform: translateY(0);
+}
+
+/* ESCOLHA DE DISPOSITIVO */
+.device-options {
+  display: flex;
+  width: 100%;
+  gap: 15px;
+  margin-top: 20px;
+  box-sizing: border-box;
+}
+
+.device-btn {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 22px 10px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px solid rgba(255, 222, 89, 0.2);
+  border-radius: 12px;
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease, transform 0.15s ease;
+}
+
+.device-btn:hover,
+.device-btn:active {
+  background: rgba(255, 222, 89, 0.12);
+  border-color: var(--cor-accent);
+  transform: translateY(-2px);
+}
+
+.device-icon {
+  font-size: 30px;
+}
+
+.device-btn span:last-child {
+  font-size: 13px;
+  opacity: 0.9;
+}
+
+/* TELA DE CELULAR: aumenta textos e áreas de toque pra ficar legível */
+@media (max-width: 480px) {
+  .landing-box {
+    width: 88%;
+    max-width: 380px;
+    padding: 30px 22px;
+    box-sizing: border-box;
+  }
+
+  .landing-box h1 {
+    font-size: 22px;
+  }
+
+  .landing-box p {
+    font-size: 15px;
+  }
+
+  .device-options {
+    gap: 12px;
+  }
+
+  .device-btn {
+    padding: 26px 8px;
+  }
+
+  .device-icon {
+    font-size: 36px;
+  }
+
+  .device-btn span:last-child {
+    font-size: 14px;
+  }
+
+  /* font-size 16px evita o navegador dar zoom automatico ao focar o campo no iOS */
+  .input-password,
+  .btn {
+    font-size: 16px;
+    padding: 14px;
+  }
+
+  .toggle-senha-btn {
+    font-size: 20px;
+  }
+}
+
+/* CAPA / TELA DE INICIAR TOUR (aparece depois da senha, antes das imagens 360) */
+#cover {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  align-items: center;
+  justify-content: center;
+  background: #000;
+  overflow: hidden;
+}
+
+#cover-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+#cover-overlay {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.35);
+}
+
+.btn-play {
+  font-size: 18px;
+  padding: 16px 38px;
+  border-radius: 50px;
+  box-shadow: 0 4px 22px rgba(255, 222, 89, 0.35);
+}
+
+.btn-play:hover {
+  filter: brightness(1.08);
+}
+
+/* LOADER */
+#loader {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: #000;
+  z-index: 9999;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 4px solid #333;
+  border-top: 4px solid var(--cor-accent);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 15px;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* PAINEL DE CENAS (galeria inferior, PC e celular) */
+#menu {
+  position: fixed;
+  top: auto;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 150px;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(6px);
+  padding: 15px;
+  box-sizing: border-box;
+  z-index: 2147483647;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
+}
+
+#menu strong {
+  display: none;
+}
+
+/* Oculta a galeria inferior quando o usuário clica no botão de ocultar */
+body.galeria-oculta #menu {
+  display: none;
+}
+
+body.galeria-oculta #panorama {
+  height: 100vh;
+}
+
+body.galeria-oculta .nav-arrow {
+  top: 50%;
+}
+
+body.galeria-oculta #back-btn,
+body.galeria-oculta #help-btn {
+  bottom: 20px;
+}
+
+body.galeria-oculta .toggle-galeria-btn {
+  bottom: 20px;
+  left: 116px;
+  transform: none;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  box-sizing: border-box;
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  border-radius: 50%;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+}
+
+body.galeria-oculta #back-btn {
+  position: fixed;
+  left: 68px;
+  bottom: 20px;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  box-sizing: border-box;
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  border-radius: 50%;
+  background: rgba(12, 18, 28, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+}
+
+body.galeria-oculta .pnlm-fullscreen-toggle-button,
+body.galeria-oculta .pnlm-fullscreen-toggle-button-inactive,
+body.galeria-oculta .pnlm-fullscreen-toggle-button-active {
+  position: fixed;
+  left: 20px;
+  right: auto;
+  bottom: 20px;
+  width: 40px !important;
+  height: 40px !important;
+  color: #000000 !important;
+  font-size: 0;
+  
+}
+
+body.galeria-oculta .pnlm-fullscreen-toggle-button::after,
+body.galeria-oculta .pnlm-fullscreen-toggle-button-inactive::after,
+body.galeria-oculta .pnlm-fullscreen-toggle-button-active::after {
+  content: "⛶";
+  display: block;
+  font-size: 35px;
+  line-height: 38px;
+}
+
+body.galeria-oculta #help-btn {
+  left: 164px;
+  right: auto;
+  width: 76px;
+  height: 40px;
+  padding: 14px;
+  box-sizing: border-box;
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  border-radius: 20px;
+  background: rgba(12, 18, 28, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+  line-height: 1;
+  white-space: nowrap;
+  display: none;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+}
+
+body.galeria-oculta #help-btn::after {
+  content: none;
+}
+
+body.galeria-oculta .pnlm-zoom-out,
+body.galeria-oculta .pnlm-zoom-in {
+  display: none;
+}
+
+body.galeria-oculta .pnlm-controls {
+  background-color: transparent !important;
+  border: none !important;
+}
+
+body.galeria-oculta .toggle-galeria-btn,
+body.galeria-oculta .pnlm-fullscreen-toggle-button,
+body.galeria-oculta .pnlm-fullscreen-toggle-button-inactive,
+body.galeria-oculta .pnlm-fullscreen-toggle-button-active,
+body.galeria-oculta #help-btn {
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  background: rgba(12, 18, 28, 0.9);
+  color: #fff;
+}
+
+body:not(.galeria-oculta) .toggle-galeria-btn {
+  left: 15px;
+  bottom: 162px;
+  transform: none;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  box-sizing: border-box;
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  border-radius: 50%;
+  background: rgba(12, 18, 28, 0.9);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+}
+
+body:not(.galeria-oculta) .pnlm-controls-container {
+  display: none;
+}
+
+body:not(.galeria-oculta) #back-btn {
+  position: fixed;
+  left: 68px;
+  bottom: 162px;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  box-sizing: border-box;
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  border-radius: 50%;
+  background: rgba(12, 18, 28, 0.9);
+  align-items: center;
+  justify-content: center;
+  display: none;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+}
+
+body:not(.galeria-oculta) .pnlm-fullscreen-toggle-button,
+body:not(.galeria-oculta) .pnlm-fullscreen-toggle-button-inactive,
+body:not(.galeria-oculta) .pnlm-fullscreen-toggle-button-active {
+  display: none !important;
+}
+
+body:not(.galeria-oculta) .pnlm-zoom-in,
+body:not(.galeria-oculta) .pnlm-zoom-out {
+  display: none !important;
+}
+
+body:not(.galeria-oculta) #help-btn {
+  display: none;
+  left: 164px;
+  right: auto;
+  bottom: 162px;
+  width: 76px;
+  height: 40px;
+  padding: 14px;
+  box-sizing: border-box;
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  border-radius: 20px;
+  background: rgba(12, 18, 28, 0.9);
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1;
+  white-space: nowrap;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+}
+
+body:not(.galeria-oculta) #help-btn::after {
+  content: none;
+}
+
+/* Botão de mostrar/ocultar a galeria */
+.toggle-galeria-btn {
+  position: fixed;
+  bottom: 162px;
+  left: 6%;
+  transform: translateX(-50%);
+  z-index: 2147483647;
+
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  cursor: pointer;
+
+  backdrop-filter: blur(6px);
+  transition: background 0.2s ease, bottom 0.2s ease;
+}
+
+.toggle-galeria-btn:hover {
+  background: rgba(0, 0, 0, 0.85);
+}
+
+/* THUMB */
+.thumb {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
+  margin-bottom: 0;
+  margin-right: 14px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.thumb img {
+  width: 180px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 6px;
+  flex-shrink: 0;
+}
+
+.thumb span {
+  font-size: 11px;
+  opacity: 0.85;
+}
+
+
+/* TOUR COMEÇA OCULTO */
+#tour {
+  display: none;
+  width: 100%;
+  height: 100vh;
+}
+
+
+/* botao de voltar / trocar modo */
+#back-btn {
+  position: absolute;
+  left: 20px;
+
+  bottom: 162px;
+  z-index: 2147483647;
+
+  background: rgba(0, 0, 0, 0.7);
+  color: #fff;
+  padding: 10px 10px;
+  border-radius: 30px;
+  font-size: 14px;
+  cursor: pointer;
+
+  backdrop-filter: blur(6px);
+  transition: background 0.2s ease;
+}
+
+#back-btn:hover {
+  background: rgba(0, 0, 0, 0.9);
+}
+
+/* botao de help */
+
+#help-btn {
+  position: fixed;
+  right: 20px;
+  bottom: 162px;
+  z-index: 2147483647;
+
+  background: rgba(0, 0, 0, 0.7);
+  color: #fff;
+  padding: 10px 14px;
+  border-radius: 30px;
+  font-size: 14px;
+  cursor: pointer;
+
+  backdrop-filter: blur(6px);
+  transition: background 0.2s ease;
+}
+
+#help-btn:hover {
+  background: rgba(0, 0, 0, 0.9);
+}
+
+/* SETAS DE NAVEGAÇÃO (funcionam também em tela cheia) */
+.nav-arrow {
+  position: fixed;
+  top: calc((100vh - 90px) / 2);
+  transform: translateY(-50%);
+  z-index: 2147483647;
+  width: 48px;
+  height: 48px;
+  background: none;
+  border: none;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 34px;
+  cursor: pointer;
+  user-select: none;
+  filter: drop-shadow(0 1px 4px rgba(0, 0, 0, 0.85));
+  transition: transform 0.15s ease, opacity 0.15s ease;
+  opacity: 0.85;
+}
+
+.nav-arrow:hover {
+  opacity: 1;
+  color: var(--cor-accent);
+  transform: translateY(-50%) scale(1.15);
+}
+
+.nav-arrow:active {
+  transform: translateY(-50%) scale(0.95);
+}
+
+.nav-prev { left: 15px; }
+.nav-next { right: 15px; }
+
+/* PONTOS DE TRANSIÇÃO ENTRE AMBIENTES (hotspots clicáveis dentro da imagem)
+   Obs: o Pannellum, quando recebe "cssClass", NÃO adiciona as classes padrão
+   dele (pnlm-hotspot, pnlm-scene) -- só "pnlm-hotspot-base" + a classe que a
+   gente definiu. Por isso os seletores aqui miram direto ".hotspot-moderno". */
+.hotspot-moderno {
+  width: 44px;
+  height: 44px;
+  cursor: pointer;
+}
+
+.hotspot-moderno::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 2px solid var(--cor-accent);
+  background: rgba(255, 222, 89, 0.18);
+  animation: hotspotPulso 2.2s ease-out infinite;
+  pointer-events: none;
+}
+
+.hotspot-moderno::after {
+  content: "→";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--cor-accent);
+  color: #1b2329;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  font-weight: 700;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.45);
+  transition: transform 0.15s ease;
+}
+
+.hotspot-moderno:hover::after {
+  transform: translate(-50%, -50%) scale(1.12);
+}
+
+@keyframes hotspotPulso {
+  0%   { transform: scale(0.55); opacity: 0.9; }
+  100% { transform: scale(1.9);  opacity: 0; }
+}
+
+/* tooltip com o nome do ambiente: o Pannellum bota o texto num <span> FILHO
+   sem classe, dentro do proprio div do hotspot, e mostra so no hover.
+   Ele fixa varios estilos via JS inline (margin/width), por isso o
+   !important -- senao nossa cor/fonte perde pro inline. */
+.hotspot-moderno span {
+  background: rgba(27, 35, 41, 0.92) !important;
+  border: 1px solid rgba(255, 222, 89, 0.4);
+  color: #fff !important;
+  font-family: var(--fonte-titulo);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  border-radius: 6px !important;
+  padding: 4px 10px !important;
+  white-space: nowrap;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+}
+
+.hotspot-moderno:hover span::after {
+  display: none; /* remove a setinha padrao do tooltip, nao combina com o estilo novo */
+}
+
+/* PAINEL DO EDITOR DE POSIÇÃO (uso interno, com ?editor=1) */
+#editor-panel {
+  display: none;
+  flex-direction: column;
+  gap: 8px;
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  z-index: 2147483647;
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  padding: 12px 18px;
+  border-radius: 12px;
+  font-size: 13px;
+  backdrop-filter: blur(6px);
+  text-align: center;
+  max-width: 260px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+}
+
+#editor-panel strong {
+  cursor: move;
+  user-select: none;
+  display: block;
+  padding-bottom: 4px;
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.25);
+}
+
+#editor-panel .editor-panel-botoes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+}
+
+#editor-panel button {
+  background: var(--cor-accent);
+  color: #1b2329;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+#editor-panel button:last-child {
+  background: #444;
+  color: #fff;
+}
+
+#editor-panel button:hover {
+  opacity: 0.85;
+}
+
+#editor-panel button.editor-panel-btn-ativo {
+  background: #d64545;
+  color: #fff;
+  animation: pulsoBotaoAtivo 1.4s ease-in-out infinite;
+}
+
+@keyframes pulsoBotaoAtivo {
+  0%, 100% { filter: brightness(1); }
+  50% { filter: brightness(1.25); }
+}
+
+/* INDICADOR DE CENA */
+#scene-indicator {
+  display: none;
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2147483647;
+  background: rgba(0, 0, 0, 0.55);
+  color: #fff;
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: 13px;
+  backdrop-filter: blur(6px);
+  white-space: nowrap;
+}
+
+/* MODAL AJUDA */
+#help-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  z-index: 3000;
+
+  align-items: center;
+  justify-content: center;
+}
+
+#help-content {
+  background: var(--cor-painel);
+  padding: 25px 30px;
+  border-radius: 14px;
+  max-width: 320px;
+  text-align: center;
+  border: 1px solid rgba(255, 222, 89, 0.18);
+  font-family: Arial, sans-serif;
+}
+
+#help-content h2 {
+  margin-top: 0;
+  font-family: var(--fonte-titulo);
+  color: var(--cor-accent);
+}
+
+#help-content ul {
+  padding-left: 18px;
+  text-align: left;
+}
+
+#help-content button {
+  margin-top: 15px;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  background: var(--cor-accent);
+  color: #1b2329;
+  font-weight: 700;
+}
+
+/* Reforço: garante que nossos controles fiquem sempre acima de QUALQUER
+   elemento interno do Pannellum, inclusive quando ele reage à mudança
+   para tela cheia (fullscreen é acionado no <html>, então tudo aqui
+   dentro é descendente do elemento em fullscreen). */
+:fullscreen .nav-arrow,
+:fullscreen #scene-indicator,
+:fullscreen #menu,
+:fullscreen #help-btn,
+:fullscreen #back-btn,
+:fullscreen .toggle-galeria-btn,
+:-webkit-full-screen .nav-arrow,
+:-webkit-full-screen #scene-indicator,
+:-webkit-full-screen #menu,
+:-webkit-full-screen #help-btn,
+:-webkit-full-screen #back-btn,
+:-webkit-full-screen .toggle-galeria-btn {
+  z-index: 2147483647 !important;
+  pointer-events: auto !important;
+  opacity: 1;
+}
+
+:fullscreen .marca-estudio--tour,
+:-webkit-full-screen .marca-estudio--tour {
+  z-index: 2147483647 !important;
+  opacity: 0.6;
+}
+
+/* A ajuda fica desativada enquanto a galeria estiver aberta. */
+body:not(.galeria-oculta) #help-btn {
+  display: none !important;
+  visibility: hidden;
+  pointer-events: none;
+}
