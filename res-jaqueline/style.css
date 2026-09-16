@@ -37,13 +37,55 @@ html, body {
   justify-content: center;
 }
 
+/* FUNDO ANIMADO: a capa do proprio cliente, com um deslize lento simulando
+   movimento (efeito leve -- nao e um giro 360 real, so um "respiro" visual
+   por tras da caixa de senha) */
+#landing-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  background: var(--cor-fundo);
+}
+
+#landing-bg-img {
+  position: absolute;
+  inset: -5%;
+  background-size: cover;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  filter: brightness(0.55) saturate(0.9);
+  animation: deslizeFundo 26s ease-in-out infinite alternate;
+}
+
+#landing-bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(27, 35, 41, 0.35), rgba(27, 35, 41, 0.88));
+}
+
+@keyframes deslizeFundo {
+  0%   { background-position: 15% 50%; transform: scale(1.08); }
+  100% { background-position: 85% 50%; transform: scale(1.14); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #landing-bg-img {
+    animation: none;
+    background-position: 50% 50%;
+  }
+}
+
 .landing-box {
   position: relative;
+  z-index: 2;
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  background: linear-gradient(180deg, var(--cor-painel), var(--cor-fundo));
+  background: linear-gradient(180deg, rgba(35, 46, 54, 0.82), rgba(27, 35, 41, 0.9));
+  backdrop-filter: blur(10px);
   padding: 40px;
   border-radius: 4px 18px 18px 18px;
   width: min(420px, 90vw);
@@ -52,7 +94,6 @@ html, body {
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45);
 }
 
-.landing-box #step-device,
 .landing-box #step-password {
   width: 100%;
 }
@@ -222,46 +263,6 @@ html, body {
   transform: translateY(0);
 }
 
-/* ESCOLHA DE DISPOSITIVO */
-.device-options {
-  display: flex;
-  width: 100%;
-  gap: 15px;
-  margin-top: 20px;
-  box-sizing: border-box;
-}
-
-.device-btn {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-  padding: 22px 10px;
-  background: rgba(255, 255, 255, 0.05);
-  border: 2px solid rgba(255, 222, 89, 0.2);
-  border-radius: 12px;
-  color: #fff;
-  cursor: pointer;
-  transition: background 0.2s ease, border-color 0.2s ease, transform 0.15s ease;
-}
-
-.device-btn:hover,
-.device-btn:active {
-  background: rgba(255, 222, 89, 0.12);
-  border-color: var(--cor-accent);
-  transform: translateY(-2px);
-}
-
-.device-icon {
-  font-size: 30px;
-}
-
-.device-btn span:last-child {
-  font-size: 13px;
-  opacity: 0.9;
-}
-
 /* TELA DE CELULAR: aumenta textos e áreas de toque pra ficar legível */
 @media (max-width: 480px) {
   .landing-box {
@@ -277,22 +278,6 @@ html, body {
 
   .landing-box p {
     font-size: 15px;
-  }
-
-  .device-options {
-    gap: 12px;
-  }
-
-  .device-btn {
-    padding: 26px 8px;
-  }
-
-  .device-icon {
-    font-size: 36px;
-  }
-
-  .device-btn span:last-child {
-    font-size: 14px;
   }
 
   /* font-size 16px evita o navegador dar zoom automatico ao focar o campo no iOS */
@@ -414,14 +399,9 @@ body.galeria-oculta .nav-arrow {
   top: 50%;
 }
 
-body.galeria-oculta #back-btn,
-body.galeria-oculta #help-btn {
-  bottom: 20px;
-}
-
 body.galeria-oculta .toggle-galeria-btn {
   bottom: 20px;
-  left: 116px;
+  left: 68px;
   transform: none;
   width: 40px;
   height: 40px;
@@ -429,23 +409,6 @@ body.galeria-oculta .toggle-galeria-btn {
   box-sizing: border-box;
   border: 1px solid rgba(255, 255, 255, 0.55);
   border-radius: 50%;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
-}
-
-body.galeria-oculta #back-btn {
-  position: fixed;
-  left: 68px;
-  bottom: 20px;
-  width: 40px;
-  height: 40px;
-  padding: 0;
-  box-sizing: border-box;
-  border: 1px solid rgba(255, 255, 255, 0.55);
-  border-radius: 50%;
-  background: rgba(12, 18, 28, 0.9);
-  display: flex;
-  align-items: center;
-  justify-content: center;
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
 }
 
@@ -472,33 +435,6 @@ body.galeria-oculta .pnlm-fullscreen-toggle-button-active::after {
   line-height: 38px;
 }
 
-body.galeria-oculta #help-btn {
-  left: 164px;
-  right: auto;
-  width: 76px;
-  height: 40px;
-  padding: 14px;
-  box-sizing: border-box;
-  border: 1px solid rgba(255, 255, 255, 0.55);
-  border-radius: 20px;
-  background: rgba(12, 18, 28, 0.9);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 5px;
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0.2px;
-  line-height: 1;
-  white-space: nowrap;
-  display: none;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
-}
-
-body.galeria-oculta #help-btn::after {
-  content: none;
-}
-
 body.galeria-oculta .pnlm-zoom-out,
 body.galeria-oculta .pnlm-zoom-in {
   display: none;
@@ -512,8 +448,7 @@ body.galeria-oculta .pnlm-controls {
 body.galeria-oculta .toggle-galeria-btn,
 body.galeria-oculta .pnlm-fullscreen-toggle-button,
 body.galeria-oculta .pnlm-fullscreen-toggle-button-inactive,
-body.galeria-oculta .pnlm-fullscreen-toggle-button-active,
-body.galeria-oculta #help-btn {
+body.galeria-oculta .pnlm-fullscreen-toggle-button-active {
   border: 1px solid rgba(255, 255, 255, 0.55);
   background: rgba(12, 18, 28, 0.9);
   color: #fff;
@@ -537,23 +472,6 @@ body:not(.galeria-oculta) .pnlm-controls-container {
   display: none;
 }
 
-body:not(.galeria-oculta) #back-btn {
-  position: fixed;
-  left: 68px;
-  bottom: 162px;
-  width: 40px;
-  height: 40px;
-  padding: 0;
-  box-sizing: border-box;
-  border: 1px solid rgba(255, 255, 255, 0.55);
-  border-radius: 50%;
-  background: rgba(12, 18, 28, 0.9);
-  align-items: center;
-  justify-content: center;
-  display: none;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
-}
-
 body:not(.galeria-oculta) .pnlm-fullscreen-toggle-button,
 body:not(.galeria-oculta) .pnlm-fullscreen-toggle-button-inactive,
 body:not(.galeria-oculta) .pnlm-fullscreen-toggle-button-active {
@@ -563,32 +481,6 @@ body:not(.galeria-oculta) .pnlm-fullscreen-toggle-button-active {
 body:not(.galeria-oculta) .pnlm-zoom-in,
 body:not(.galeria-oculta) .pnlm-zoom-out {
   display: none !important;
-}
-
-body:not(.galeria-oculta) #help-btn {
-  display: none;
-  left: 164px;
-  right: auto;
-  bottom: 162px;
-  width: 76px;
-  height: 40px;
-  padding: 14px;
-  box-sizing: border-box;
-  border: 1px solid rgba(255, 255, 255, 0.55);
-  border-radius: 20px;
-  background: rgba(12, 18, 28, 0.9);
-  align-items: center;
-  justify-content: center;
-  gap: 5px;
-  font-size: 12px;
-  font-weight: 600;
-  line-height: 1;
-  white-space: nowrap;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
-}
-
-body:not(.galeria-oculta) #help-btn::after {
-  content: none;
 }
 
 /* Botão de mostrar/ocultar a galeria */
@@ -652,52 +544,6 @@ body:not(.galeria-oculta) #help-btn::after {
   height: 100vh;
 }
 
-
-/* botao de voltar / trocar modo */
-#back-btn {
-  position: absolute;
-  left: 20px;
-
-  bottom: 162px;
-  z-index: 2147483647;
-
-  background: rgba(0, 0, 0, 0.7);
-  color: #fff;
-  padding: 10px 10px;
-  border-radius: 30px;
-  font-size: 14px;
-  cursor: pointer;
-
-  backdrop-filter: blur(6px);
-  transition: background 0.2s ease;
-}
-
-#back-btn:hover {
-  background: rgba(0, 0, 0, 0.9);
-}
-
-/* botao de help */
-
-#help-btn {
-  position: fixed;
-  right: 20px;
-  bottom: 162px;
-  z-index: 2147483647;
-
-  background: rgba(0, 0, 0, 0.7);
-  color: #fff;
-  padding: 10px 14px;
-  border-radius: 30px;
-  font-size: 14px;
-  cursor: pointer;
-
-  backdrop-filter: blur(6px);
-  transition: background 0.2s ease;
-}
-
-#help-btn:hover {
-  background: rgba(0, 0, 0, 0.9);
-}
 
 /* SETAS DE NAVEGAÇÃO (funcionam também em tela cheia) */
 .nav-arrow {
@@ -888,50 +734,6 @@ body:not(.galeria-oculta) #help-btn::after {
   white-space: nowrap;
 }
 
-/* MODAL AJUDA */
-#help-modal {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.75);
-  z-index: 3000;
-
-  align-items: center;
-  justify-content: center;
-}
-
-#help-content {
-  background: var(--cor-painel);
-  padding: 25px 30px;
-  border-radius: 14px;
-  max-width: 320px;
-  text-align: center;
-  border: 1px solid rgba(255, 222, 89, 0.18);
-  font-family: Arial, sans-serif;
-}
-
-#help-content h2 {
-  margin-top: 0;
-  font-family: var(--fonte-titulo);
-  color: var(--cor-accent);
-}
-
-#help-content ul {
-  padding-left: 18px;
-  text-align: left;
-}
-
-#help-content button {
-  margin-top: 15px;
-  padding: 8px 16px;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  background: var(--cor-accent);
-  color: #1b2329;
-  font-weight: 700;
-}
-
 /* Reforço: garante que nossos controles fiquem sempre acima de QUALQUER
    elemento interno do Pannellum, inclusive quando ele reage à mudança
    para tela cheia (fullscreen é acionado no <html>, então tudo aqui
@@ -939,14 +741,10 @@ body:not(.galeria-oculta) #help-btn::after {
 :fullscreen .nav-arrow,
 :fullscreen #scene-indicator,
 :fullscreen #menu,
-:fullscreen #help-btn,
-:fullscreen #back-btn,
 :fullscreen .toggle-galeria-btn,
 :-webkit-full-screen .nav-arrow,
 :-webkit-full-screen #scene-indicator,
 :-webkit-full-screen #menu,
-:-webkit-full-screen #help-btn,
-:-webkit-full-screen #back-btn,
 :-webkit-full-screen .toggle-galeria-btn {
   z-index: 2147483647 !important;
   pointer-events: auto !important;
@@ -957,11 +755,4 @@ body:not(.galeria-oculta) #help-btn::after {
 :-webkit-full-screen .marca-estudio--tour {
   z-index: 2147483647 !important;
   opacity: 0.6;
-}
-
-/* A ajuda fica desativada enquanto a galeria estiver aberta. */
-body:not(.galeria-oculta) #help-btn {
-  display: none !important;
-  visibility: hidden;
-  pointer-events: none;
 }
