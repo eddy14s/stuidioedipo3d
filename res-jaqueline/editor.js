@@ -1,12 +1,3 @@
-// MODO EDITOR DE POSIÇÃO
-// Ativado só com ?editor=1 na URL -- o cliente nunca ve isso.
-// Fluxo: abrir o tour com esse parametro, girar cada imagem ate a vista
-// desejada, clicar "Salvar posicao desta cena", repetir pra todas, e no
-// final "Copiar bloco" cola o resultado direto no config.js do cliente.
-//
-// Alem disso, o mesmo painel tem o "Modo hotspot": ativa, clica em um ponto
-// da propria imagem 360 (ex: a porta de outro ambiente), escolhe pra qual
-// cena aquele ponto leva, e o marcador ja aparece na hora pra conferir.
 
 const posicoesCapturadas = {};
 const hotspotsCapturados = {};
