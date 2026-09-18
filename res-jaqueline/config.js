@@ -1,10 +1,7 @@
 const CONFIG = {
   pasta: "imagens_360/",
   extensao: "jpg",
-  extensoes: {
-    // defina aqui apenas as imagens que fogem do padrao acima
-    // exemplo: 3: "png"
-  },
+  extensoes: {},
   totalImagens: 10,
   senha: "Jasmim433",
   capa: "imagens_360/1.jpg",
