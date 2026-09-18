@@ -6,11 +6,16 @@ const CONFIG = {
   senha: "Jasmim433",
   capa: "imagens_360/1.jpg",
   titulos: {
-    1: "Banho Piscina",
-    2: "Lavabo",
-    3: "Banho Suíte01",
-    4: "Banho Hospedes",
-    5: "Banho 03"
+    1: "LIVING",
+    2: "GOURMET",
+    3: "LAVANDERIA",
+    4: "SUITE_03",
+    5: "BANHO_03",
+    6: "BANHO_02",
+    7: "CIRCULAÇÃO",
+    8: "LAVABO",
+    9: "BANHO_MASTER",
+    10: "BANHO_04"
   },
   // Ordem visual da galeria. Os números são IDs fixos das cenas/imagens;
   // reorganizar esta lista não altera arquivos, posições nem hotspots.
