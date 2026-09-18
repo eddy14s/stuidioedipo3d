@@ -15,15 +15,58 @@ const CONFIG = {
     4: "Banho Hospedes",
     5: "Banho 03"
   },
-  posicoes: {
-    // define pra onde a camera aponta ao abrir cada imagem (em graus)
-    // yaw: 0 a 360 (direcao horizontal) | pitch: -90 a 90 (pra cima/baixo)
-    // so precisa listar as imagens que quer travar; o resto abre de frente (yaw 0)
-    // exemplo: 2: { yaw: 145, pitch: -5 }
+  // Ordem visual da galeria. Os números são IDs fixos das cenas/imagens;
+  // reorganizar esta lista não altera arquivos, posições nem hotspots.
+  ordemGaleria: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+posicoes: {
+    1: { yaw: -64, pitch: 0 },
+    2: { yaw: -84, pitch: -8 },
+    3: { yaw: -123, pitch: -20 },
+    4: { yaw: 89, pitch: -3 },
+    5: { yaw: -11, pitch: -2 },
+    6: { yaw: -20, pitch: -13 },
+    7: { yaw: -31, pitch: -13 },
+    8: { yaw: 151, pitch: -10 },
+    9: { yaw: -123, pitch: -14 }
   },
-  hotspots: {
-    // pontos clicaveis DENTRO de uma imagem que levam pra outra cena
-    // chave = cena de origem, valor = lista de pontos { destino, yaw, pitch }
-    // exemplo: 1: [ { destino: 3, yaw: 42, pitch: -3 } ]
+hotspots: {
+    1: [
+      { destino: 2, yaw: -69, pitch: 1 }
+    ],
+    2: [
+      { destino: 1, yaw: 109, pitch: -1 },
+      { destino: 3, yaw: -111, pitch: -4 },
+      { destino: 4, yaw: -94, pitch: -3 },
+      { destino: 7, yaw: 63, pitch: -5 },
+      { destino: 8, yaw: 174, pitch: 14 }
+    ],
+    3: [
+      { destino: 2, yaw: 178, pitch: -3 }
+    ],
+    4: [
+      { destino: 2, yaw: 48, pitch: -1 },
+      { destino: 5, yaw: 122, pitch: -3 },
+      { destino: 6, yaw: -46, pitch: -1 }
+    ],
+    5: [
+      { destino: 4, yaw: -59, pitch: -5 }
+    ],
+    6: [
+      { destino: 4, yaw: -157, pitch: -2 }
+    ],
+    7: [
+      { destino: 2, yaw: 93, pitch: 3 }
+    ],
+    8: [
+      { destino: 9, yaw: 0, pitch: -6 }
+    ],
+    9: [
+      { destino: 2, yaw: 146, pitch: -5 }
+    ]
   }
 };
+
+
+
+
+

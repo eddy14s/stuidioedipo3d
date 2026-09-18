@@ -43,6 +43,15 @@ function iniciarTour() {
     scenes: scenes
   });
 
+  // Hotspots chamam loadScene diretamente; manter esse índice sincronizado é
+  // indispensável para o editor alterar os marcadores da cena que está aberta.
+  viewer.on("scenechange", (sceneId) => {
+    const indice = imagens360.findIndex((imagem) => imagem.id === sceneId);
+    if (indice < 0) return;
+    currentSceneIndex = indice;
+    atualizarIndicadorCena();
+  });
+
   criarMenu();
   criarSetasNavegacao();
   criarIndicadorCena();
