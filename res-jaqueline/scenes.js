@@ -24,15 +24,16 @@ for (let i = 1; i <= CONFIG.totalImagens; i++) {
     panorama: `${CONFIG.pasta}${i}.${ext}`,
     yaw: posicao.yaw || 0,
     pitch: posicao.pitch || 0,
-    hotSpots: pontosDaCena.map((ponto) => ({
+    hotSpots: pontosDaCena.map((ponto, idx) => ({
+      id: `hs_${i}_${idx}`,
       pitch: ponto.pitch || 0,
       yaw: ponto.yaw,
-      type: "scene",
-      sceneId: `scene_${ponto.destino}`,
+      cssClass: "hotspot-moderno",
       text: tituloDaCena(ponto.destino),
-      cssClass: "hotspot-moderno"
-      // sem targetYaw/targetPitch de proposito: assim a cena de destino abre
-      // na posicao configurada em CONFIG.posicoes daquela cena, nao "de lado"
+      // clique customizado (ver transicoes.js) em vez do type:"scene" padrao:
+      // assim controlamos o passo-a-frente + chegada continua + assentamento
+      clickHandlerFunc: handlerTransicaoHotspot,
+      clickHandlerArgs: { destino: ponto.destino, yaw: ponto.yaw, pitch: ponto.pitch }
     }))
   };
 }

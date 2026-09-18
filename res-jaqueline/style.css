@@ -22,6 +22,14 @@ html, body {
   width: 100%;
   height: calc(100vh - 90px);
   background: #000;
+  filter: blur(0px);
+  transition: filter 0.3s ease;
+}
+
+/* leve desfoque durante a transicao "step-in" de um hotspot pro outro
+   ambiente -- reforca a sensacao de movimento (ver transicoes.js) */
+#panorama.transicao-hotspot {
+  filter: blur(3px);
 }
 
 /* Remove o link de créditos "Pannellum" que aparece por padrão no visualizador */
@@ -667,16 +675,46 @@ body:not(.galeria-oculta) .pnlm-zoom-out {
   font-size: 13px;
   backdrop-filter: blur(6px);
   text-align: center;
-  max-width: 260px;
+  width: min(300px, calc(100vw - 32px));
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+}
+
+#editor-panel .editor-panel-cabecalho {
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 #editor-panel strong {
   cursor: move;
   user-select: none;
   display: block;
+  flex: 1;
+  text-align: left;
   padding-bottom: 4px;
   border-bottom: 1px dashed rgba(255, 255, 255, 0.25);
+}
+
+#editor-panel .editor-panel-conteudo {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+#editor-panel.editor-panel--recolhido .editor-panel-conteudo {
+  display: none;
+}
+
+#editor-panel .editor-panel-btn-recolher {
+  flex: 0 0 auto;
+  width: 26px;
+  height: 26px;
+  padding: 0;
+  border-radius: 50%;
+  background: #444;
+  color: #fff;
+  font-size: 18px;
+  line-height: 1;
 }
 
 #editor-panel .editor-panel-botoes {
@@ -712,6 +750,132 @@ body:not(.galeria-oculta) .pnlm-zoom-out {
   animation: pulsoBotaoAtivo 1.4s ease-in-out infinite;
 }
 
+#editor-panel .editor-panel-dica {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 11px;
+  line-height: 1.4;
+}
+
+#editor-panel .editor-ambientes {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding-top: 8px;
+  border-top: 1px dashed rgba(255, 255, 255, 0.25);
+  text-align: left;
+}
+
+#editor-panel .editor-ambientes > span {
+  font-weight: 700;
+}
+
+#editor-lista-ambientes {
+  display: grid;
+  gap: 5px;
+  max-height: min(32vh, 270px);
+  overflow-y: auto;
+  padding-right: 3px;
+}
+
+#editor-panel .editor-ambiente-item {
+  display: grid;
+  grid-template-columns: 30px 42px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 6px;
+  border-radius: 7px;
+  transition: background-color 0.12s ease, outline-color 0.12s ease;
+}
+
+#editor-panel .editor-ambiente-item--arrastando {
+  opacity: 0.45;
+}
+
+#editor-panel .editor-ambiente-item--destino {
+  background: rgba(255, 222, 89, 0.18);
+  outline: 1px dashed var(--cor-accent);
+}
+
+#editor-panel .editor-ambiente-indice {
+  color: rgba(255, 255, 255, 0.65);
+  font-size: 11px;
+  text-align: right;
+}
+
+#editor-panel .editor-ambiente-input {
+  min-width: 0;
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  padding: 5px 7px;
+  font: inherit;
+}
+
+#editor-panel .editor-ambiente-input:focus {
+  outline: 2px solid var(--cor-accent);
+  border-color: transparent;
+}
+
+#editor-panel .editor-ambiente-miniatura {
+  width: 42px;
+  height: 30px;
+  border-radius: 4px;
+  object-fit: cover;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+#editor-panel .editor-ordem-alca {
+  width: 29px;
+  height: 30px;
+  padding: 0;
+  border-radius: 6px;
+  background: #444;
+  color: #fff;
+  cursor: grab;
+  font-size: 18px;
+  line-height: 1;
+}
+
+#editor-panel .editor-ordem-alca:active {
+  cursor: grabbing;
+}
+
+/* Alça adicionada apenas no editor. Ela fica visível no Modo hotspot;
+   o clique comum no marcador continua navegando. */
+.hotspot-moderno .editor-hotspot-mover {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  z-index: 3;
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  padding: 0;
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  border-radius: 50%;
+  background: #1b2329;
+  color: #fff;
+  cursor: grab;
+  font: 700 15px/1 Arial, sans-serif;
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(0.8);
+  transition: opacity 0.15s ease, transform 0.15s ease;
+}
+
+body.editor-hotspot-ativo .hotspot-moderno .editor-hotspot-mover {
+  opacity: 1;
+  transform: scale(1);
+  pointer-events: auto;
+}
+
+.hotspot-moderno.editor-hotspot--movendo .editor-hotspot-mover {
+  cursor: grabbing;
+}
+
 @keyframes pulsoBotaoAtivo {
   0%, 100% { filter: brightness(1); }
   50% { filter: brightness(1.25); }
@@ -742,10 +906,12 @@ body:not(.galeria-oculta) .pnlm-zoom-out {
 :fullscreen #scene-indicator,
 :fullscreen #menu,
 :fullscreen .toggle-galeria-btn,
+:fullscreen #editor-panel,
 :-webkit-full-screen .nav-arrow,
 :-webkit-full-screen #scene-indicator,
 :-webkit-full-screen #menu,
-:-webkit-full-screen .toggle-galeria-btn {
+:-webkit-full-screen .toggle-galeria-btn,
+:-webkit-full-screen #editor-panel {
   z-index: 2147483647 !important;
   pointer-events: auto !important;
   opacity: 1;

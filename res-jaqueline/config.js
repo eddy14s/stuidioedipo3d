@@ -1,35 +1,42 @@
 const CONFIG = {
   pasta: "imagens_360/",
   extensao: "jpg",
-  extensoes: {},
+  extensoes: {
+    // defina aqui apenas as imagens que fogem do padrao acima
+    // exemplo: 3: "png"
+  },
   totalImagens: 10,
-  senha: "Jasmim930",
+  senha: "Jasmim433",
   capa: "imagens_360/1.jpg",
   titulos: {
-    1: "LIVING",
-    2: "CIRCULAÇÃO",
-    3: "GOURMET",
-    4: "LAVANDERIA",
-    5: "LAVABO",
-    6: "BANHEIRO_01",
-    7: "BANHEIRO_02",
-    8: "BANHEIRO_03",
-    9: "BANHEIRO_04"
+    1: "Banho Piscina",
+    2: "Lavabo",
+    3: "Banho Suíte01",
+    4: "Banho Hospedes",
+    5: "Banho 03"
   },
+  // Ordem visual da galeria. Os números são IDs fixos das cenas/imagens;
+  // reorganizar esta lista não altera arquivos, posições nem hotspots.
+  ordemGaleria: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
 posicoes: {
-    1: { yaw: 136, pitch: -21 },
-    2: { yaw: -45, pitch: -13 },
-    3: { yaw: 71, pitch: 1 },
-    4: { yaw: -17, pitch: -8 },
-    5: { yaw: -115, pitch: -12 },
-    6: { yaw: -15, pitch: -30 },
-    7: { yaw: 148, pitch: -11 },
-    8: { yaw: -128, pitch: -15 },
-    9: { yaw: 146, pitch: -1 }
+    1: { yaw: -64, pitch: 0 },
+    2: { yaw: -84, pitch: -8 },
+    3: { yaw: -123, pitch: -20 },
+    4: { yaw: 89, pitch: -3 },
+    5: { yaw: -11, pitch: -2 },
+    6: { yaw: -20, pitch: -13 },
+    7: { yaw: -31, pitch: -13 },
+    8: { yaw: 151, pitch: -10 },
+    9: { yaw: -123, pitch: -14 }
   },
-  hotspots: {
-    // pontos clicaveis DENTRO de uma imagem que levam pra outra cena
-    // chave = cena de origem, valor = lista de pontos { destino, yaw, pitch }
-    // exemplo: 1: [ { destino: 3, yaw: 42, pitch: -3 } ]
-  }
+hotspots: {
+ //   9: [
+ //     { destino: 2, yaw: 146, pitch: -5 }
+//    ]
+ }
 };
+
+
+
+
+

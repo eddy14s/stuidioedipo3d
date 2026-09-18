@@ -71,7 +71,11 @@
 
   <!-- 🎯 PAINEL DO EDITOR DE POSIÇÃO (só aparece com ?editor=1 na URL) -->
   <div id="editor-panel" style="display:none;">
-    <strong>🎯 Editor de posição &amp; hotspots</strong>
+    <div class="editor-panel-cabecalho">
+      <strong>🎯 Editor de posição &amp; hotspots</strong>
+      <button type="button" id="btn-recolher-editor" class="editor-panel-btn-recolher" onclick="alternarPainelEditor()" aria-label="Recolher painel do editor" aria-expanded="true">−</button>
+    </div>
+    <div class="editor-panel-conteudo">
     <span id="editor-status">carregando...</span>
     <div class="editor-panel-botoes">
       <button type="button" onclick="salvarPosicaoAtual()">💾 Salvar posição desta cena</button>
@@ -81,6 +85,18 @@
       <button type="button" id="btn-modo-hotspot" onclick="alternarModoHotspot()">🔗 Ativar modo hotspot</button>
       <button type="button" onclick="copiarBlocoHotspots()">📋 Copiar hotspots</button>
     </div>
+    <div class="editor-panel-botoes">
+      <button type="button" onclick="copiarBlocoTitulos()">📋 Copiar títulos</button>
+      <button type="button" onclick="copiarOrdemGaleria()">📋 Copiar ordem da galeria</button>
+    </div>
+    <section class="editor-ambientes" aria-labelledby="editor-ambientes-titulo">
+      <span id="editor-ambientes-titulo">Ambientes — renomear e ordenar galeria</span>
+      <div id="editor-lista-ambientes"></div>
+    </section>
+    <small class="editor-panel-dica">
+      Com Modo hotspot ativo: arraste a alça ↕ do marcador para mover · botão direito apaga
+    </small>
+    </div>
   </div>
 
 </div>
@@ -89,6 +105,7 @@
 <script src="https://cdn.jsdelivr.net/npm/pannellum/build/pannellum.js"></script>
 
 <script src="config.js"></script>
+<script src="transicoes.js"></script>
 <script src="scenes.js"></script>
 <script src="viewer.js"></script>
 <script src="menu.js"></script>
