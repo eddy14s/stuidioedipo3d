@@ -2,7 +2,7 @@ const CONFIG = {
   pasta: "imagens_360/",
   extensao: "jpg",
   extensoes: {},
-  totalImagens: 9,
+  totalImagens: 10,
   senha: "Jasmim930",
   capa: "imagens_360/1.jpg",
   titulos: {

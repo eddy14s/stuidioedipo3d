@@ -44,7 +44,6 @@ function iniciarTour() {
   });
 
   criarMenu();
-  ativarAjuda();
   criarSetasNavegacao();
   criarIndicadorCena();
   criarBotaoGaleria();

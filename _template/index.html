@@ -14,6 +14,11 @@
 
 <body class="landing">
 
+<!-- 🖼️ FUNDO ANIMADO (capa do cliente, com efeito de deslize simulando movimento) -->
+<div id="landing-bg" aria-hidden="true">
+  <div id="landing-bg-img"></div>
+</div>
+
 <!-- 🔒 LANDING / SENHA -->
 <div class="landing-box" id="landing">
 
@@ -22,25 +27,7 @@
     <img src="assets/logo-edipo3d.png" alt="Studio Édipo3D" class="marca-estudio__img">
   </div>
 
-  <!-- ETAPA 1: escolha do modo -->
-  <div id="step-device">
-    <h1>Tour Virtual 360°</h1>
-    <p>Escolha como você vai visualizar</p>
-
-    <div class="device-options">
-      <button class="device-btn" data-device="pc">
-        <span class="device-icon">💻</span>
-        <span>Computador</span>
-      </button>
-      <button class="device-btn" data-device="mobile">
-        <span class="device-icon">📱</span>
-        <span>Celular</span>
-      </button>
-    </div>
-  </div>
-
-  <!-- ETAPA 2: senha -->
-  <div id="step-password" style="display:none;">
+  <div id="step-password">
     <h1>Tour Virtual 360°</h1>
     <p>Digite a senha para acessar</p>
 
@@ -72,23 +59,6 @@
 
   <div id="menu">
     <strong>Cenas</strong>
-  </div>
-
-  <div id="back-btn" onclick="sairDoTour()" aria-label="Voltar e trocar modo de visualização">↩</div>
-
-  <div id="help-btn">Ajuda ⓘ</div>
-
-  <div id="help-modal">
-    <div id="help-content">
-      <h2>Controles</h2>
-      <ul>
-        <li>Arraste para olhar</li>
-        <li>Scroll para zoom</li>
-        <li>← → trocar cena</li>
-        <li>Botão abrir galeria</li>
-      </ul>
-      <button id="close-help">Fechar</button>
-    </div>
   </div>
 
   <div id="panorama"></div>
@@ -123,15 +93,27 @@
 <script src="viewer.js"></script>
 <script src="menu.js"></script>
 <script src="keyboard.js"></script>
-<script src="help.js"></script>
 <script src="navigation.js"></script>
-<script src="device.js"></script>
 <script src="editor.js"></script>
 
 <!-- CONTROLE DE ENTRADA -->
 <script>
+const VALIDADE_LOGIN_MS = 24 * 60 * 60 * 1000; // 24 horas
+
+function loginAindaValido() {
+  const expiraEm = Number(localStorage.getItem("tourAuthExpira") || 0);
+  return Boolean(expiraEm) && Date.now() < expiraEm;
+}
+
+function definirFundoAnimado() {
+  const camada = document.getElementById('landing-bg-img');
+  const imagem = CONFIG.capa || `${CONFIG.pasta}1.${CONFIG.extensao}`;
+  camada.style.backgroundImage = `url("${imagem}")`;
+}
+
 function mostrarCapa() {
   document.getElementById('landing').style.display = "none";
+  document.getElementById('landing-bg').style.display = "none";
 
   const capaImg = document.getElementById('cover-img');
   capaImg.src = CONFIG.capa || `${CONFIG.pasta}1.${CONFIG.extensao}`;
@@ -163,7 +145,7 @@ function entrar() {
     return;
   }
 
-  localStorage.setItem("tourAuth", "ok");
+  localStorage.setItem("tourAuthExpira", String(Date.now() + VALIDADE_LOGIN_MS));
   mostrarCapa();
 }
 
@@ -178,14 +160,11 @@ document.getElementById('toggle-senha').addEventListener('click', () => {
   btn.setAttribute('aria-label', visivel ? "Mostrar senha" : "Ocultar senha");
 });
 
-// já escolheu dispositivo e já logou antes -> pula direto pra capa (senha nao pede de novo)
-if (localStorage.getItem("tourAuth") === "ok") {
-  aplicarDevice(localStorage.getItem("tourDevice") || "pc");
+definirFundoAnimado();
+
+// login ainda dentro das 24h -> pula direto pra capa, senao pede senha de novo
+if (loginAindaValido()) {
   mostrarCapa();
-} else if (localStorage.getItem("tourDevice")) {
-  // já escolheu dispositivo antes, mas ainda não logou -> pula direto pra senha
-  document.getElementById('step-device').style.display = "none";
-  document.getElementById('step-password').style.display = "block";
 }
 </script>
 
