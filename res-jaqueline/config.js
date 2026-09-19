@@ -9,13 +9,15 @@ const CONFIG = {
     1: "LIVING",
     2: "GOURMET",
     3: "LAVANDERIA",
-    4: "SUITE_03",
-    5: "BANHO_03",
+    4: "SUITE_,MASTER",
+    5: "CLOSET_MASTER",
     6: "BANHO_MASTER",
-    7: "LAVABO",
-    8: "SUITE_04",
-    9: "BANHO_05",
-    10: "CIRCULAÇÃO"
+    7: "SUITE_03",
+    8: "BANHO_03",
+    9: "LAVABO",
+    10: "BANHO_04",
+    11: "BANHO_05",
+    12: "CIRCULAÇÃO"
   },
   // Ordem visual da galeria. Os números são IDs fixos das cenas/imagens;
   // reorganizar esta lista não altera arquivos, posições nem hotspots.
