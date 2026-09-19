@@ -37,10 +37,23 @@ posicoes: {
     12: { yaw: 126, pitch: -11 }
   },
 hotspots: {
- //   9: [
- //     { destino: 2, yaw: 146, pitch: -5 }
-//    ]
- }
+    4: [
+      { destino: 5, yaw: 112, pitch: -6 }
+    ],
+    5: [
+      { destino: 4, yaw: 179, pitch: -7 },
+      { destino: 6, yaw: -2, pitch: -6 }
+    ],
+    6: [
+      { destino: 5, yaw: 95, pitch: -9 }
+    ],
+    7: [
+      { destino: 8, yaw: -90, pitch: -7 }
+    ],
+    8: [
+      { destino: 7, yaw: 148, pitch: -6 }
+    ]
+  }
 };
 
 
