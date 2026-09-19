@@ -8,6 +8,11 @@ const CONFIG = {
   totalImagens: 10,
   senha: "Jasmim433",
   capa: "imagens_360/1.jpg",
+  // Preenchido automaticamente pelo publicar.py -- guarda o nome do arquivo
+  // original de cada imagem, pra reconhecer cada uma ao atualizar so as
+  // imagens depois (mesmo que a ordem na pasta de origem mude), sem perder
+  // titulos/posicoes/hotspots ja editados. Nao precisa mexer aqui na mao.
+  arquivosOriginais: {},
   titulos: {
     1: "Banho Piscina",
     2: "Lavabo",

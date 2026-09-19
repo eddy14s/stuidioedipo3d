@@ -23,15 +23,18 @@ const CONFIG = {
   // reorganizar esta lista não altera arquivos, posições nem hotspots.
   ordemGaleria: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
 posicoes: {
+    1: { yaw: 142, pitch: -5 },
     2: { yaw: 87, pitch: -2 },
     3: { yaw: -18, pitch: -14 },
-    4: { yaw: -2, pitch: -2 },
-    5: { yaw: -122, pitch: -14 },
-    6: { yaw: 150, pitch: -11 },
-    7: { yaw: 126, pitch: -16 },
+    4: { yaw: 33, pitch: -30 },
+    5: { yaw: 153, pitch: -29 },
+    6: { yaw: -43, pitch: -12 },
+    7: { yaw: 150, pitch: -15 },
     8: { yaw: -118, pitch: -13 },
-    9: { yaw: -34, pitch: -12 },
-    10: { yaw: -14, pitch: -16 }
+    9: { yaw: -121, pitch: -14 },
+    10: { yaw: 142, pitch: -10 },
+    11: { yaw: 36, pitch: 2 },
+    12: { yaw: 126, pitch: -11 }
   },
 hotspots: {
  //   9: [
