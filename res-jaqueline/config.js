@@ -1,7 +1,9 @@
 const CONFIG = {
   pasta: "imagens_360/",
   extensao: "jpg",
-  extensoes: {},
+  extensoes: {
+    3: "png"
+  },
   totalImagens: 12,
   senha: "Jasmim433",
   capa: "imagens_360/1.jpg",
@@ -54,9 +56,20 @@ hotspots: {
       { destino: 7, yaw: 148, pitch: -6 }
     ]
   }
+,
+  arquivosOriginais: {
+    1: "001_exr.jpg",
+    2: "002_exr.jpg",
+    3: "003_tif.png",
+    4: "004_exr.jpg",
+    5: "1.jpg",
+    6: "1_View01_01_View03.jpg",
+    7: "1_View01_01_View04.jpg",
+    8: "1_View01_01_View05.jpg",
+    9: "1_View01_01_View09.jpg",
+    10: "3.jpg",
+    11: "4.jpg",
+    12: "9.jpg"
+  }
 };
-
-
-
-
 
