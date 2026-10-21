@@ -22,18 +22,34 @@ const CONFIG = {
   // reorganizar esta lista não altera arquivos, posições nem hotspots.
   ordemGaleria: [2, 4, 5, 9, 1, 3, 6, 12, 7, 8, 10, 11],
 posicoes: {
-    2: { yaw: 87, pitch: -2 },
-    4: { yaw: -18, pitch: -14 },
-    5: { yaw: 33, pitch: -30 },
-    9: { yaw: 153, pitch: -29 },
-    12: { yaw: 126, pitch: -11 }
+    1: { yaw: -13, pitch: -10 },
+    2: { yaw: 21, pitch: -11 },
+    3: { yaw: -81, pitch: -1 },
+    6: { yaw: -41, pitch: -14 },
+    7: { yaw: 136, pitch: -24 },
+    8: { yaw: 145, pitch: -15 },
+    10: { yaw: -127, pitch: -25 },
+    11: { yaw: -30, pitch: -17 }
   },
 hotspots: {
-    5: [
-      { destino: 9, yaw: 112, pitch: -6 }
+    2: [
+      { destino: 5, yaw: 179, pitch: -2 },
+      { destino: 6, yaw: 1, pitch: -3 }
     ],
-    9: [
-      { destino: 5, yaw: 179, pitch: -7 }
+    3: [
+      { destino: 4, yaw: 124, pitch: -1 }
+    ],
+    5: [
+      { destino: 2, yaw: 110, pitch: -10 }
+    ],
+    6: [
+      { destino: 2, yaw: 93, pitch: 0 }
+    ],
+    8: [
+      { destino: 10, yaw: -88, pitch: -4 }
+    ],
+    10: [
+      { destino: 8, yaw: 136, pitch: -7 }
     ]
   }
 ,
