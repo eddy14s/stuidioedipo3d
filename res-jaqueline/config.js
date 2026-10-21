@@ -4,7 +4,7 @@ const CONFIG = {
   extensoes: {
     6: "png"
   },
-  totalImagens: 13,
+  totalImagens: 12,
   senha: "Jasmim433",
   capa: "imagens_360/1.jpg",
   titulos: {
