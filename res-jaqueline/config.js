@@ -2,74 +2,63 @@ const CONFIG = {
   pasta: "imagens_360/",
   extensao: "jpg",
   extensoes: {
-    3: "png"
+    6: "png"
   },
-  totalImagens: 12,
+  totalImagens: 13,
   senha: "Jasmim433",
   capa: "imagens_360/1.jpg",
   titulos: {
     1: "LIVING",
-    2: "GOURMET",
-    3: "LAVANDERIA",
-    4: "SUITE_,MASTER",
-    5: "CLOSET_MASTER",
-    6: "BANHO_MASTER",
-    7: "SUITE_03",
-    8: "BANHO_03",
-    9: "LAVABO",
-    10: "BANHO_04",
-    11: "BANHO_05",
-    12: "CIRCULAÇÃO"
+    3: "GOURMET",
+    6: "LAVANDERIA",
+    7: "SUITE_,MASTER",
+    10: "CLOSET_MASTER",
+    11: "SUITE_03",
+    12: "BANHO_03",
+    13: "CIRCULAÇÃO"
   },
   // Ordem visual da galeria. Os números são IDs fixos das cenas/imagens;
   // reorganizar esta lista não altera arquivos, posições nem hotspots.
-  ordemGaleria: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+  ordemGaleria: [1, 3, 6, 7, 10, 11, 12, 2, 4, 5, 8, 9, 13],
 posicoes: {
     1: { yaw: 142, pitch: -5 },
-    2: { yaw: 87, pitch: -2 },
-    3: { yaw: -18, pitch: -14 },
-    4: { yaw: 33, pitch: -30 },
-    5: { yaw: 153, pitch: -29 },
-    6: { yaw: -43, pitch: -12 },
-    7: { yaw: 150, pitch: -15 },
-    8: { yaw: -118, pitch: -13 },
-    9: { yaw: -121, pitch: -14 },
-    10: { yaw: 142, pitch: -10 },
-    11: { yaw: 36, pitch: 2 },
-    12: { yaw: 126, pitch: -11 }
+    3: { yaw: 87, pitch: -2 },
+    6: { yaw: -18, pitch: -14 },
+    7: { yaw: 33, pitch: -30 },
+    10: { yaw: 153, pitch: -29 },
+    11: { yaw: 150, pitch: -15 },
+    12: { yaw: -118, pitch: -13 },
+    13: { yaw: 126, pitch: -11 }
   },
 hotspots: {
-    4: [
-      { destino: 5, yaw: 112, pitch: -6 }
-    ],
-    5: [
-      { destino: 4, yaw: 179, pitch: -7 },
-      { destino: 6, yaw: -2, pitch: -6 }
-    ],
-    6: [
-      { destino: 5, yaw: 95, pitch: -9 }
-    ],
     7: [
-      { destino: 8, yaw: -90, pitch: -7 }
+      { destino: 10, yaw: 112, pitch: -6 }
     ],
-    8: [
-      { destino: 7, yaw: 148, pitch: -6 }
+    10: [
+      { destino: 7, yaw: 179, pitch: -7 }
+    ],
+    11: [
+      { destino: 12, yaw: -90, pitch: -7 }
+    ],
+    12: [
+      { destino: 11, yaw: 148, pitch: -6 }
     ]
   }
 ,
   arquivosOriginais: {
     1: "001_exr.jpg",
-    2: "002_exr.jpg",
-    3: "003_tif.png",
-    4: "004_exr.jpg",
-    5: "1.jpg",
-    6: "1_View01_01_View03.jpg",
-    7: "1_View01_01_View04.jpg",
-    8: "1_View01_01_View05.jpg",
-    9: "1_View01_01_View09.jpg",
-    10: "3.jpg",
-    11: "4.jpg",
-    12: "9.jpg"
+    2: "001_tif.jpg",
+    3: "002_exr.jpg",
+    4: "002_tif.jpg",
+    5: "003_tif.jpg",
+    6: "003_tif.png",
+    7: "004_exr.jpg",
+    8: "004_tif.jpg",
+    9: "005_tif.jpg",
+    10: "1.jpg",
+    11: "1_View01_01_View04.jpg",
+    12: "1_View01_01_View05.jpg",
+    13: "9.jpg"
   }
 };
 
