@@ -2,52 +2,54 @@ const CONFIG = {
   pasta: "imagens_360/",
   extensao: "jpg",
   extensoes: {
-    2: "png",
-    5: "png",
+    4: "png",
+    7: "png",
     8: "png",
-    9: "png"
+    10: "png",
+    11: "png"
   },
-  totalImagens: 11,
+  totalImagens: 12,
   senha: "Jasmim433",
   capa: "imagens_360/1.jpg",
   titulos: {
-    3: "GOURMET",
-    5: "LAVANDERIA",
-    6: "SUITE_,MASTER",
-    10: "CLOSET_MASTER",
-    11: "CIRCULAÇÃO"
+    2: "GOURMET",
+    4: "LAVANDERIA",
+    5: "SUITE_,MASTER",
+    9: "CLOSET_MASTER",
+    12: "CIRCULAÇÃO"
   },
   // Ordem visual da galeria. Os números são IDs fixos das cenas/imagens;
   // reorganizar esta lista não altera arquivos, posições nem hotspots.
-  ordemGaleria: [3, 5, 6, 10, 1, 4, 7, 11, 2, 8, 9],
+  ordemGaleria: [2, 4, 5, 9, 1, 3, 6, 12, 7, 8, 10, 11],
 posicoes: {
-    3: { yaw: 87, pitch: -2 },
-    5: { yaw: -18, pitch: -14 },
-    6: { yaw: 33, pitch: -30 },
-    10: { yaw: 153, pitch: -29 },
-    11: { yaw: 126, pitch: -11 }
+    2: { yaw: 87, pitch: -2 },
+    4: { yaw: -18, pitch: -14 },
+    5: { yaw: 33, pitch: -30 },
+    9: { yaw: 153, pitch: -29 },
+    12: { yaw: 126, pitch: -11 }
   },
 hotspots: {
-    6: [
-      { destino: 10, yaw: 112, pitch: -6 }
+    5: [
+      { destino: 9, yaw: 112, pitch: -6 }
     ],
-    10: [
-      { destino: 6, yaw: 179, pitch: -7 }
+    9: [
+      { destino: 5, yaw: 179, pitch: -7 }
     ]
   }
 ,
   arquivosOriginais: {
     1: "001_tif.jpg",
-    2: "001_tif.png",
-    3: "002_exr.jpg",
-    4: "003_tif.jpg",
-    5: "003_tif.png",
-    6: "004_exr.jpg",
-    7: "004_tif.jpg",
-    8: "005_tif.png",
-    9: "008_tif.png",
-    10: "1.jpg",
-    11: "9.jpg"
+    2: "002_exr.jpg",
+    3: "003_tif.jpg",
+    4: "003_tif.png",
+    5: "004_exr.jpg",
+    6: "004_tif.jpg",
+    7: "005_tif.png",
+    8: "008_tif.png",
+    9: "1.jpg",
+    10: "10.png",
+    11: "2_tif.png",
+    12: "9.jpg"
   }
 };
 
