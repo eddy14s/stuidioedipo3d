@@ -38,27 +38,7 @@ posicoes: {
     10: { yaw: -127, pitch: -25 },
     11: { yaw: -30, pitch: -17 }
   },
-hotspots: {
-    2: [
-      { destino: 5, yaw: 179, pitch: -2 },
-      { destino: 6, yaw: 1, pitch: -3 }
-    ],
-    3: [
-      { destino: 4, yaw: 124, pitch: -1 }
-    ],
-    5: [
-      { destino: 2, yaw: 110, pitch: -10 }
-    ],
-    6: [
-      { destino: 2, yaw: 93, pitch: 0 }
-    ],
-    8: [
-      { destino: 10, yaw: -88, pitch: -4 }
-    ],
-    10: [
-      { destino: 8, yaw: 136, pitch: -7 }
-    ]
-  }
+hotspots: {}
 ,
   arquivosOriginais: {
     1: "001_tif.png",
