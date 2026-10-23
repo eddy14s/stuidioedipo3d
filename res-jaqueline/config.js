@@ -1,12 +1,13 @@
 const CONFIG = {
   pasta: "imagens_360/",
-  extensao: "jpg",
+  extensao: "png",
   extensoes: {
-    4: "png",
-    7: "png",
-    8: "png",
-    10: "png",
-    11: "png"
+    2: "jpg",
+    3: "jpg",
+    5: "jpg",
+    6: "jpg",
+    9: "jpg",
+    12: "jpg"
   },
   totalImagens: 12,
   senha: "Jasmim433",
@@ -20,9 +21,8 @@ const CONFIG = {
   },
   // Ordem visual da galeria. Os números são IDs fixos das cenas/imagens;
   // reorganizar esta lista não altera arquivos, posições nem hotspots.
-  ordemGaleria: [2, 4, 5, 9, 1, 3, 6, 12, 7, 8, 10, 11],
+  ordemGaleria: [2, 4, 5, 9, 3, 6, 12, 7, 8, 10, 11, 1],
 posicoes: {
-    1: { yaw: -13, pitch: -10 },
     2: { yaw: 21, pitch: -11 },
     3: { yaw: -81, pitch: -1 },
     6: { yaw: -41, pitch: -14 },
@@ -54,7 +54,7 @@ hotspots: {
   }
 ,
   arquivosOriginais: {
-    1: "001_tif.jpg",
+    1: "001_tif.png",
     2: "002_exr.jpg",
     3: "003_tif.jpg",
     4: "003_tif.png",
