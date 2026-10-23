@@ -2,8 +2,8 @@ const CONFIG = {
   pasta: "imagens_360/",
   extensao: "jpg",
   extensoes: {
-    2: "png",
     5: "png",
+    7: "png",
     8: "png",
     9: "png",
     10: "png",
@@ -13,10 +13,17 @@ const CONFIG = {
   senha: "Jasmim433",
   capa: "imagens_360/1.jpg",
   titulos: {
-    1: "CLOSET_MASTER",
-    3: "GOURMET",
-    5: "LAVANDERIA",
-    6: "SUITE_,MASTER",
+    1: "LIVING",
+    2: "SUITE_,MASTER",
+    3: "CLOSET",
+    4: "BANHO_MASTER",
+    5: "LAVABO",
+    6: "COZINHA",
+    7: "LAVANDERIA",
+    8: "BANHO PISCINA",
+    9: "SUITE 3",
+    10: "BANHO 3",
+    11: "BANHO 4",
     12: "CIRCULAÇÃO"
   },
   // Ordem visual da galeria. Os números são IDs fixos das cenas/imagens;
