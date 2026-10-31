@@ -1,15 +1,15 @@
 const CONFIG = {
   pasta: "imagens_360/",
-  extensao: "jpg",
+  extensao: "png",
   extensoes: {
-    5: "png",
-    7: "png",
-    8: "png",
-    9: "png",
-    10: "png",
-    11: "png"
+    2: "jpg",
+    3: "jpg",
+    5: "jpg",
+    6: "jpg",
+    9: "jpg",
+    14: "jpg"
   },
-  totalImagens: 12,
+  totalImagens: 14,
   senha: "Jasmim433",
   capa: "imagens_360/1.jpg",
   titulos: {
@@ -22,21 +22,21 @@ const CONFIG = {
     7: "LAVANDERIA",
     8: "BANHO PISCINA",
     9: "SUITE 3",
-    10: "BANHO 3",
-    11: "BANHO 4",
-    12: "CIRCULAÇÃO"
+    11: "BANHO 3",
+    13: "BANHO 4",
+    14: "CIRCULAÇÃO"
   },
   // Ordem visual da galeria. Os números são IDs fixos das cenas/imagens;
   // reorganizar esta lista não altera arquivos, posições nem hotspots.
-  ordemGaleria: [2, 4, 5, 9, 3, 6, 12, 7, 8, 10, 11, 1],
+  ordemGaleria: [2, 4, 5, 9, 3, 6, 14, 7, 8, 11, 13, 1, 10, 12],
 posicoes: {
     2: { yaw: 21, pitch: -11 },
     3: { yaw: -81, pitch: -1 },
     6: { yaw: -41, pitch: -14 },
     7: { yaw: 136, pitch: -24 },
     8: { yaw: 145, pitch: -15 },
-    10: { yaw: -127, pitch: -25 },
-    11: { yaw: -30, pitch: -17 }
+    11: { yaw: -127, pitch: -25 },
+    13: { yaw: -30, pitch: -17 }
   },
 hotspots: {}
 ,
@@ -50,9 +50,11 @@ hotspots: {}
     7: "005_tif.png",
     8: "008_tif.png",
     9: "1.jpg",
-    10: "10.png",
-    11: "2_tif.png",
-    12: "9.jpg"
+    10: "1.png",
+    11: "10.png",
+    12: "2.png",
+    13: "2_tif.png",
+    14: "9.jpg"
   }
 };
 
