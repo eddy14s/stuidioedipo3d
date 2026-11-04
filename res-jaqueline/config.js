@@ -10,7 +10,7 @@ const CONFIG = {
     14: "jpg"
   },
   totalImagens: 14,
-  senha: "Jasmim433",
+  senha: "Jasmim387",
   capa: "imagens_360/1.jpg",
   titulos: {},
   // Ordem visual da galeria. Os números são IDs fixos das cenas/imagens;
