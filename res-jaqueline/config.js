@@ -2,11 +2,11 @@ const CONFIG = {
   pasta: "imagens_360/",
   extensao: "png",
   extensoes: {
-    2: "jpg",
+    1: "jpg",
     3: "jpg",
-    5: "jpg",
+    4: "jpg",
     6: "jpg",
-    9: "jpg",
+    7: "jpg",
     14: "jpg"
   },
   totalImagens: 14,
