@@ -1,15 +1,13 @@
 const CONFIG = {
   pasta: "imagens_360/",
-  extensao: "jpg",
+  extensao: "png",
   extensoes: {
-    1: "png",
-    4: "png",
-    7: "png",
-    8: "png",
-    10: "png",
-    11: "png",
-    15: "png",
-    16: "png"
+    2: "jpg",
+    3: "jpg",
+    5: "jpg",
+    6: "jpg",
+    9: "jpg",
+    17: "jpg"
   },
   totalImagens: 17,
   senha: "Jasmim387",
@@ -41,9 +39,9 @@ hotspots: {}
     9: "1.jpg",
     10: "1.png",
     11: "10.png",
-    12: "11.jpg",
-    13: "12.jpg",
-    14: "13.jpg",
+    12: "11.png",
+    13: "12.png",
+    14: "13.png",
     15: "2.png",
     16: "2_tif.png",
     17: "9.jpg"
